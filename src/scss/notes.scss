@@ -1,6 +1,6 @@
 .notes {
   max-width: 1200px;
-  margin: 32px auto;
+  margin: 16px auto;
   &__title {
     margin-left: 20px;
     display: flex;
@@ -62,7 +62,7 @@
 .main {
   transition: box-shadow 1s;
   border-radius: 16px;
-  margin: 16px;
+  margin: 8px;
   display: flex;
   flex-direction: column;
 }
@@ -114,7 +114,7 @@ Content НАЧАЛО - основной DIV заметки
   line-height: 28px;
   font-size: 24px;
   font-weight: bold;
-  margin-bottom: 12px;
+  margin-bottom: 15px;
 }
 
 .content__description {
@@ -376,6 +376,12 @@ Content КОНЕЦ
   z-index: 1;
 }
 
+@media (min-width: 1201px) {
+  .main {
+    margin: 12px;
+  }
+}
+
 @media (max-width: 1200px) {
   .notes {
     &__content {
@@ -393,15 +399,15 @@ Content КОНЕЦ
     grid-row-end: span 1;
   }
   .medium {
-    grid-column-end: span 3;
-    grid-row-end: span 2;
+    grid-column-end: span 2;
+    grid-row-end: span 3;
   }
   .large {
-    grid-column-end: span 6;
-    grid-row-end: span 1;
+    grid-column-end: span 4;
+    grid-row-end: span 3;
   }
   .link__text {
-    line-height: 20px;
+    line-height: 22px;
     font-size: 16px;
   }
 }
@@ -412,10 +418,53 @@ Content КОНЕЦ
       width: 100%;
       margin: 0 auto;
       display: grid;
-      grid-template-columns: 1fr;
+      grid-template-columns: repeat(6, 1fr);
       /* grid-template-columns: 225px 225px 225px 225px; */
       grid-auto-flow: dense;
       justify-self: center;
+    }
+  }
+  .small {
+    grid-column-end: span 3;
+    grid-row-end: span 1;
+  }
+  .medium {
+    grid-column-end: span 3;
+    grid-row-end: span 2;
+  }
+  .large {
+    grid-column-end: span 6;
+    grid-row-end: span 1;
+  }
+  .actions {
+    opacity: 1;
+    transition: opacity 1s;
+  }
+  .link__text {
+    line-height: 20px;
+    font-size: 16px;
+  }
+}
+
+@media (max-width: 500px) {
+  .notes {
+    &__title {
+      &_text {
+        display: none;
+      }
+    }
+  }
+  .block {
+    width: 48px;
+    height: 48px;
+  }
+}
+
+@media (max-width: 700px) {
+  .notes {
+    &__content {
+      display: grid;
+      grid-template-columns: 1fr;
     }
   }
   .small {
@@ -429,9 +478,5 @@ Content КОНЕЦ
   .large {
     grid-column-end: span 1;
     grid-row-end: span 1;
-  }
-  .actions {
-    opacity: 1;
-    transition: opacity 1s;
   }
 }

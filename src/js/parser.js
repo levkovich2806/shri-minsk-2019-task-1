@@ -1,6 +1,6 @@
 import moment from 'moment';
 
-export  default function Parser({ colors, tags }) {
+export default function Parser({ colors, tags }) {
 
   this.createTagsHash = (tags) => {
     this.tags = {};
@@ -26,26 +26,26 @@ export  default function Parser({ colors, tags }) {
     this.getReminder();
 
     switch (type) {
-    case "text":
-      this.getContentOpenDiv();
-      this.getHeader();
-      break;
-    case "image":
-      this.getContentOpenDiv({
-        type: "image",
-        value: "imageNote"
-      });
-      this.getHeader();
-      this.getImage();
-      break;
-    case "list":
-      this.getContentOpenDiv({
-        type: "list",
-        value: "listNotByu",
-      });
-      this.getHeader();
-      this.getListContent();
-      break;
+      case "text":
+        this.getContentOpenDiv();
+        this.getHeader();
+        break;
+      case "image":
+        this.getContentOpenDiv({
+          type: "image",
+          value: "imageNote"
+        });
+        this.getHeader();
+        this.getImage();
+        break;
+      case "list":
+        this.getContentOpenDiv({
+          type: "list",
+          value: "listNotByu",
+        });
+        this.getHeader();
+        this.getListContent();
+        break;
     }
     this.getDescription();
     this.getFooter();
@@ -59,14 +59,14 @@ export  default function Parser({ colors, tags }) {
   this.getNoteSize = () => {
     const { size } = this.currentNote;
     switch (size) {
-    case "s":
-      return "small";
-    case "m":
-      return "medium";
-    case "l":
-      return "large";
-    default:
-      return "small";
+      case "s":
+        return "small";
+      case "m":
+        return "medium";
+      case "l":
+        return "large";
+      default:
+        return "small";
     }
   };
 
@@ -172,8 +172,8 @@ export  default function Parser({ colors, tags }) {
   this.getActions = () => {
     return `
       <div class="actions">
-        <i class='fas fa-pen'></i>
         <i class='fas fa-check'></i>
+        <i class='fas fa-pen'></i>
       </div>
     `;
   };
