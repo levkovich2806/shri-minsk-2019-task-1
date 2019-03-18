@@ -11,8 +11,7 @@
     "clear": "del-cli dist",
     "eslint": "eslint src/js/*.js",
     "stylelint": "stylelint 'src/scss/*.scss' --config ./.stylelintrc.json",
-    "heroku-prebuild": "npm install --dev",
-    "heroku-postbuild": "npm run build"
+    "heroku-postbuild": "npm install && npm install --only=dev --no-shrinkwrap && npm run build"
   },
   "repository": {
     "type": "git",
