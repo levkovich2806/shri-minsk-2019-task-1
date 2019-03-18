@@ -223,7 +223,7 @@ export default function Parser({ colors, tags }) {
     }
     return `
       <div class="${classes}">
-        <img src="./images/link24.png" class="link__image"><span class="link__text">${url}</span>
+        <img src="./images/link24.png" class="link__image"><a href="${url}" target="_blank" class="link__text">${url}</a>
       </div>
     `;
   };
@@ -247,7 +247,7 @@ export default function Parser({ colors, tags }) {
   this.getImg = ({ url }) => {
     return `
       <div class="images__content_image">
-        <img src="${url}">
+        <a href="${url}" target="_blank"><img src="${url}"></a>
       </div>
     `;
   };

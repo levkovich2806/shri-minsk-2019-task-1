@@ -25,7 +25,6 @@ module.exports = {
             loader: MiniCssExtractPlugin.loader,
             options: {
               publicPath: '../../',
-              minimize: true
             }
           },
           { loader: 'css-loader' },
