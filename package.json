@@ -10,7 +10,8 @@
     "start": "webpack-dev-server --mode development --open",
     "clear": "del-cli dist",
     "eslint": "eslint src/js/*.js",
-    "stylelint": "stylelint 'src/scss/*.scss' --config ./.stylelintrc.json"
+    "stylelint": "stylelint 'src/scss/*.scss' --config ./.stylelintrc.json",
+    "heroku-postbuild": "npm run build"
   },
   "repository": {
     "type": "git",
