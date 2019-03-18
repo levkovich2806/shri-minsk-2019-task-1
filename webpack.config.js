@@ -1,16 +1,22 @@
 const path = require('path');
-//const UglifyJSPlugin = require('uglifyjs-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const CleanWebpackPlugin = require('clean-webpack-plugin');
-var HtmlWebpackPlugin = require('html-webpack-plugin');
+const OptimizeCSSAssetsPlugin = require("optimize-css-assets-webpack-plugin");
+const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = {
+  optimization: {
+    minimizer: [
+      new OptimizeCSSAssetsPlugin({})
+    ]
+  },
   entry: "./src/index.js",
-  mode: "development",
+  mode: "prodaction",
   output: {
     path: path.resolve(__dirname, 'dist'),
     filename: "bundle.js",
   },
+  
   module: {
     rules: [
       {
@@ -19,7 +25,8 @@ module.exports = {
           {
             loader: MiniCssExtractPlugin.loader,
             options: {
-              publicPath: '../../'
+              publicPath: '../../',
+              minimize: true
             }
           },
           { loader: 'css-loader' },
@@ -46,10 +53,12 @@ module.exports = {
     new HtmlWebpackPlugin({
       template: 'src/index.html'
     }),
-    //new UglifyJSPlugin(),
-    new CleanWebpackPlugin(),
+    new CleanWebpackPlugin(),//Очищаем dist при каждом build
     new MiniCssExtractPlugin({
-      filename: "./[name].css"
+      filename: "./[name].css",
+      options: {
+        minimize: true,
+    }
     })
   ]
 };
