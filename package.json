@@ -7,10 +7,11 @@
     "dev": "webpack --mode development",
     "build": "webpack --mode production",
     "watch": "webpack --mode development --watch",
-    "start": "webpack --mode production",
+    "start": "webpack-dev-server --mode development --open",
     "clear": "del-cli dist",
     "eslint": "eslint src/js/*.js",
     "stylelint": "stylelint 'src/scss/*.scss' --config ./.stylelintrc.json",
+    "heroku-prebuild": "npm install --dev",
     "heroku-postbuild": "npm run build"
   },
   "repository": {
