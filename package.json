@@ -7,7 +7,7 @@
     "dev": "webpack --mode development",
     "build": "webpack --mode production",
     "watch": "webpack --mode development --watch",
-    "start": "npm install && npm install --only=dev --no-shrinkwrap && npm run build",
+    "start": "webpack-dev-server --mode development --open",
     "clear": "del-cli dist",
     "eslint": "eslint src/js/*.js",
     "stylelint": "stylelint 'src/scss/*.scss' --config ./.stylelintrc.json"
