@@ -7,11 +7,10 @@
     "dev": "webpack --mode development",
     "build": "webpack --mode production",
     "watch": "webpack --mode development --watch",
-    "start": "webpack-dev-server --mode development --open",
+    "start": "npm install && npm install --only=dev --no-shrinkwrap && npm run build",
     "clear": "del-cli dist",
     "eslint": "eslint src/js/*.js",
     "stylelint": "stylelint 'src/scss/*.scss' --config ./.stylelintrc.json",
-    "heroku-postbuild": "npm install && npm install --only=dev --no-shrinkwrap && npm run build"
   },
   "repository": {
     "type": "git",
