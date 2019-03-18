@@ -108,6 +108,23 @@ body {
   display: flex;
 }
 
+.footer {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  padding: 16px;
+  background: #ffffff;
+  color: rgba(51, 51, 51, 0.6);
+  font-family: Helvetica;
+  font-size: 16px;
+  line-height: 32px;
+  &__author {
+    margin: 0 auto;
+    padding-left: 120px;
+  }
+  &__copyright {}
+}
+
 @media (min-width: 1024px) {
   .navbar {
     display: flex;
