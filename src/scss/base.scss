@@ -1,0 +1,157 @@
+body {
+  font-family: Helvetica, sans-serif;
+  background-color: #f2f2f2;
+  margin: 0;
+  padding: 0;
+}
+
+.navbar {
+  display: flex;
+  flex-direction: column;
+  font-size: 18px;
+  background-color: white;
+}
+
+.js-menu {
+  flex: 2;
+  order: 2;
+  flex-direction: column;
+  display: none;
+  margin: 16px;
+  z-index: 1;
+  ;
+}
+
+.main-nav {
+  order: 2;
+  display: flex;
+  flex-direction: column;
+  margin: 0 16px;
+}
+
+.search {
+  width: 100%;
+  order: 3;
+  align-self: center;
+  display: flex;
+  flex-direction: row;
+  border-color: rgb(194, 194, 194);
+  &__text {
+    border: 2px solid #e6e6e6;
+    box-sizing: border-box;
+    border-radius: 4px;
+    padding-left: 12px;
+    width: 100%;
+    height: 32px;
+    &::placeholder {
+      opacity: 0.2;
+    }
+  }
+  &__submit {
+    background-color: #e6e6e6;
+    padding: 5px 15px;
+    border-radius: 0 4px 4px 0;
+    margin-left: -4px;
+    cursor: pointer;
+    &:hover {
+      background-color: rgb(194, 194, 194);
+    }
+    &:active {
+      background-color: rgb(221, 221, 221);
+    }
+  }
+}
+
+.logo {
+  order: 1;
+  flex: 1;
+  font-size: 22px;
+  white-space: nowrap;
+  margin: 18px;
+  text-decoration: none;
+  color: rgba(0, 0, 0, 1);
+  &__corporate {
+    font-weight: bold;
+  }
+  &::first-letter {
+    color: red;
+  }
+}
+
+.navbar-toggle {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  cursor: pointer;
+  color: rgba(0, 0, 0, 0.8);
+  font-size: 24px;
+}
+
+.action {
+  font-family: Helvetica;
+  text-decoration: none;
+  align-self: center;
+  text-align: center;
+  margin-bottom: 20px;
+  color: rgba(51, 51, 51, 0.6);
+  &__active {
+    color: #333333;
+  }
+  &__btn {
+    background-color: #ffcc00;
+    border-radius: 4px;
+    padding: 10px 15px;
+    color: #333333;
+  }
+  width: 100%;
+}
+
+.active {
+  display: flex;
+}
+
+@media (min-width: 1024px) {
+  .navbar {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    padding-bottom: 0;
+    height: 70px;
+    align-items: center;
+  }
+  .js-menu {
+    order: 2;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    flex: 2;
+  }
+  .logo {
+    order: 1;
+    flex: 1;
+  }
+  .search {
+    order: 1;
+    display: inherit;
+    &__text {
+      width: 400px;
+    }
+  }
+  .main-nav {
+    order: 2;
+    align-self: center;
+    margin-left: auto;
+    display: flex;
+    margin-right: 30px;
+    flex-direction: row;
+    a {
+      margin-top: 18px;
+    }
+  }
+  .navbar-toggle {
+    display: none;
+  }
+  .action {
+    margin-left: 32px;
+  }
+}
