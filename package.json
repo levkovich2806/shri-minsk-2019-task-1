@@ -7,7 +7,7 @@
     "dev": "webpack --mode development",
     "build": "webpack --mode production",
     "watch": "webpack --mode development --watch",
-    "start": "webpack-dev-server --mode development --open",
+    "start": "webpack --mode production",
     "clear": "del-cli dist",
     "eslint": "eslint src/js/*.js",
     "stylelint": "stylelint 'src/scss/*.scss' --config ./.stylelintrc.json",
