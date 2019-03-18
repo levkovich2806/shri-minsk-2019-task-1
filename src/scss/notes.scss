@@ -1,12 +1,47 @@
-#notes {
+.notes {
   max-width: 1200px;
-  width: 100%;
-  margin: 0 auto;
-  display: grid;
-  grid-template-columns: repeat(6, 1fr);
-  /* grid-template-columns: 225px 225px 225px 225px; */
-  grid-auto-flow: dense;
-  justify-self: center;
+  margin: 32px auto;
+  &__title {
+    margin-left: 20px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-start;
+    &_text {
+      font-size: 36px;
+      line-height: 42px;
+    }
+    &_blocks {
+      display: flex;
+      flex-direction: row;
+    }
+  }
+  &__content {
+    width: 100%;
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    /* grid-template-columns: 225px 225px 225px 225px; */
+    grid-auto-flow: dense;
+    justify-self: center;
+  }
+}
+
+.block {
+  width: 32px;
+  height: 32px;
+  opacity: 0.4;
+  margin-left: 10px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: opacity 0.5s;
+}
+
+.block:hover {
+  opacity: 1;
+}
+
+.block:active {
+  opacity: 0.8;
 }
 
 .small {
@@ -342,14 +377,16 @@ Content КОНЕЦ
 }
 
 @media (max-width: 1200px) {
-  #notes {
-    width: 100%;
-    margin: 0 auto;
-    display: grid;
-    grid-template-columns: repeat(6, 1fr);
-    /* grid-template-columns: 225px 225px 225px 225px; */
-    grid-auto-flow: dense;
-    justify-self: center;
+  .notes {
+    &__content {
+      width: 100%;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: repeat(6, 1fr);
+      /* grid-template-columns: 225px 225px 225px 225px; */
+      grid-auto-flow: dense;
+      justify-self: center;
+    }
   }
   .small {
     grid-column-end: span 2;
@@ -370,14 +407,16 @@ Content КОНЕЦ
 }
 
 @media (max-width: 1024px) {
-  #notes {
-    width: 100%;
-    margin: 0 auto;
-    display: grid;
-    grid-template-columns: 1fr;
-    /* grid-template-columns: 225px 225px 225px 225px; */
-    grid-auto-flow: dense;
-    justify-self: center;
+  .notes {
+    &__content {
+      width: 100%;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1fr;
+      /* grid-template-columns: 225px 225px 225px 225px; */
+      grid-auto-flow: dense;
+      justify-self: center;
+    }
   }
   .small {
     grid-column-end: span 1;

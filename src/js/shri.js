@@ -304,6 +304,6 @@ const data = {
       "created": 1520160803000
     }
   ]
-}
+};
 
 export default data;

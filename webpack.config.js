@@ -16,7 +16,7 @@ module.exports = {
     path: path.resolve(__dirname, 'dist'),
     filename: "bundle.js",
   },
-  
+
   module: {
     rules: [
       {
@@ -37,15 +37,25 @@ module.exports = {
         test: /\.(png|jpg|gif|svg)$/,
         loader: 'file-loader',
         options: {
-            name: '[name].[ext]',
-            publicPath: 'images/',
-            outputPath: 'images/'
+          name: '[name].[ext]',
+          publicPath: 'images/',
+          outputPath: 'images/'
         },
       },
       {
         test: /\.(js|jsx)$/,
         exclude: /node_modules/,
         loader: "babel-loader"
+      },
+      {
+        test: /\.(woff(2)?|ttf)(\?v=\d+\.\d+\.\d+)?$/,
+        use: [{
+          loader: 'file-loader',
+          options: {
+            name: '[name].[ext]',
+            outputPath: 'fonts/'
+          }
+        }]
       }
     ]
   },
@@ -58,7 +68,7 @@ module.exports = {
       filename: "./[name].css",
       options: {
         minimize: true,
-    }
+      }
     })
   ]
 };

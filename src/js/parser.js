@@ -18,7 +18,7 @@ export  default function Parser({ colors, tags }) {
 
   this.createNote = item => {
     this.currentNote = item;
-    const { type, size } = this.currentNote;
+    const { type } = this.currentNote;
     const classes = "main " + this.getNoteSize();
 
     this.currentNoteHtml = `<div class="${classes}">`;
@@ -26,26 +26,26 @@ export  default function Parser({ colors, tags }) {
     this.getReminder();
 
     switch (type) {
-      case "text":
-        this.getContentOpenDiv();
-        this.getHeader();
-        break;
-      case "image":
-        this.getContentOpenDiv({
-          type: "image",
-          value: "imageNote"
-        });
-        this.getHeader();
-        this.getImage();
-        break;
-      case "list":
-        this.getContentOpenDiv({
-          type: "list",
-          value: "listNotByu",
-        });
-        this.getHeader();
-        this.getListContent();
-        break;
+    case "text":
+      this.getContentOpenDiv();
+      this.getHeader();
+      break;
+    case "image":
+      this.getContentOpenDiv({
+        type: "image",
+        value: "imageNote"
+      });
+      this.getHeader();
+      this.getImage();
+      break;
+    case "list":
+      this.getContentOpenDiv({
+        type: "list",
+        value: "listNotByu",
+      });
+      this.getHeader();
+      this.getListContent();
+      break;
     }
     this.getDescription();
     this.getFooter();
@@ -54,21 +54,21 @@ export  default function Parser({ colors, tags }) {
     this.getBottom();
 
     return this.currentNoteHtml;
-  }
+  };
 
   this.getNoteSize = () => {
     const { size } = this.currentNote;
     switch (size) {
-      case "s":
-        return "small";
-      case "m":
-        return "medium";
-      case "l":
-        return "large";
-      default:
-        return "small";
+    case "s":
+      return "small";
+    case "m":
+      return "medium";
+    case "l":
+      return "large";
+    default:
+      return "small";
     }
-  }
+  };
 
   this.getReminder = () => {
     const { reminder } = this.currentNote;
@@ -80,14 +80,14 @@ export  default function Parser({ colors, tags }) {
             <div class="reminder__text">${text}</div>
           </div>`;
     }
-  }
+  };
 
   this.getHeader = () => {
     const { title } = this.currentNote;
     if (title) {
       this.currentNoteHtml += `<div class="content__header">${title}</div>`;
     }
-  }
+  };
 
   this.getDescription = () => {
     const { text } = this.currentNote;
@@ -95,7 +95,7 @@ export  default function Parser({ colors, tags }) {
       const stylingText = this.nl2br(text);
       this.currentNoteHtml += `<div class="content__description">${stylingText}</div>`;
     }
-  }
+  };
 
   this.getImage = () => {
     const { url } = this.currentNote;
@@ -107,7 +107,7 @@ export  default function Parser({ colors, tags }) {
         value: "withTopBlock listContainer",
       });
     }
-  }
+  };
 
   this.getListContent = () => {
     this.getList(false);
@@ -118,7 +118,7 @@ export  default function Parser({ colors, tags }) {
       value: "withTopBlock listContainer",
     });
     this.getList(true);
-  }
+  };
 
   this.getList = (checkedState) => {
     const { items } = this.currentNote;
@@ -131,7 +131,7 @@ export  default function Parser({ colors, tags }) {
       });
       this.currentNoteHtml += `</div>`;
     }
-  }
+  };
 
   this.getListItem = ({ text, checked }) => {
     const checkedState = checked ? "checked" : "";
@@ -141,14 +141,14 @@ export  default function Parser({ colors, tags }) {
         <span class="checkmark"></span>
       </label>
     `;
-  }
+  };
 
   this.getFooter = () => {
     this.currentNoteHtml += `<div class="content__footer">`;
     this.getTags();
     this.getFooterBottom();
     this.currentNoteHtml += `</div>`;
-  }
+  };
 
   this.getTags = () => {
     const { tags } = this.currentNote;
@@ -157,17 +157,17 @@ export  default function Parser({ colors, tags }) {
       tags.forEach((index) => {
         const tag = this.testFormater(this.tags[index]);
         this.currentNoteHtml += `<div class="tag">${tag}</div>`;
-      })
+      });
       this.currentNoteHtml += `</div>`;
     }
-  }
+  };
 
   this.getFooterBottom = () => {
     this.currentNoteHtml += `<div class="content__footer_bottom">`;
     this.currentNoteHtml += this.getActions();
     this.currentNoteHtml += this.getTime();
     this.currentNoteHtml += `</div>`;
-  }
+  };
 
   this.getActions = () => {
     return `
@@ -176,7 +176,7 @@ export  default function Parser({ colors, tags }) {
         <i class='fas fa-check'></i>
       </div>
     `;
-  }
+  };
 
   this.getTime = () => {
     const { created } = this.currentNote;
@@ -184,7 +184,7 @@ export  default function Parser({ colors, tags }) {
       const date = this.getReadableDate(created / 1000);
       return `<div class="date">${date}</div>`;
     }
-  }
+  };
 
   this.getBottom = () => {
     const { attachments } = this.currentNote;
@@ -200,7 +200,7 @@ export  default function Parser({ colors, tags }) {
       }
       this.currentNoteHtml += `</div>`;
     }
-  }
+  };
 
   this.getBottomLinks = (attachments) => {
     let html = `<div class="links">`;
@@ -211,10 +211,10 @@ export  default function Parser({ colors, tags }) {
         last = true;
       }
       html += this.getLink(attachments[i], last);
-    };
+    }
     html += `</div>`;
     return html;
-  }
+  };
 
   this.getLink = ({ url }, last) => {
     let classes = "link";
@@ -226,7 +226,7 @@ export  default function Parser({ colors, tags }) {
         <img src="./images/link24.png" class="link__image"><span class="link__text">${url}</span>
       </div>
     `;
-  }
+  };
 
   this.getBottomImages = (attachments) => {
     let html = `<div class="images">`;
@@ -242,7 +242,7 @@ export  default function Parser({ colors, tags }) {
     html += `</div>`;
     html += `</div>`;
     return html;
-  }
+  };
 
   this.getImg = ({ url }) => {
     return `
@@ -250,7 +250,7 @@ export  default function Parser({ colors, tags }) {
         <img src="${url}">
       </div>
     `;
-  }
+  };
 
   this.getContentOpenDiv = (modificator = { type: "", value: "" }) => {
     const { reminder } = this.currentNote;
@@ -268,17 +268,17 @@ export  default function Parser({ colors, tags }) {
       }
     }
     this.currentNoteHtml += `<div class="${classes}" style="background-color: ${colorValue}">`;
-  }
+  };
 
   this.getBgStyle = () => {
     const { color } = this.currentNote;
     return this.colors[color] ? this.colors[color] : "#ffffff";
-  }
+  };
 
   this.nl2br = (str, is_xhtml) => {
     var breakTag = (is_xhtml || typeof is_xhtml === 'undefined') ? '<br />' : '<br>';
     return (str + '').replace(/([^>\r\n]?)(\r\n|\n\r|\r|\n)/g, '$1' + breakTag + '$2');
-  }
+  };
 
   this.getReadableReminder = (date) => {
     const normalDate = moment.unix(date);
@@ -292,7 +292,7 @@ export  default function Parser({ colors, tags }) {
     } else {
       return `Сегодня в ${time}`;
     }
-  }
+  };
 
   this.getReadableDate = (date) => {
     const now = moment().unix();
@@ -319,14 +319,14 @@ export  default function Parser({ colors, tags }) {
     } else {
       return `${time}, сегодня`;
     }
-  }
+  };
 
   this.testFormater = (text) => {
     if (text.length > 30) {
       return text.substring(0, 30) + "...";
     }
     return text;
-  }
+  };
 
   this.createColorHash(colors);
   this.createTagsHash(tags);
