@@ -437,6 +437,7 @@ Content КОНЕЦ
 @media (max-width: 500px) {
   .notes {
     &__title {
+      margin: 0;
       &_text {
         display: none;
       }
