@@ -3,6 +3,12 @@ import data from './shri';
 
 document.addEventListener('DOMContentLoaded', function () {
 
+  const clearBtn = document.getElementsByClassName("search__clear");
+  const search = document.getElementsByClassName("search__text");
+  clearBtn[0].addEventListener("click", () => {
+    search[0].value = "";
+  })
+
   const mainNav = document.getElementsByClassName("js-menu");
   const navBarToggle = document.getElementById("js-navbar-toggle");
 
