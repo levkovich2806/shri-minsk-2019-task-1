@@ -9,17 +9,6 @@ document.addEventListener('DOMContentLoaded', function () {
     search[0].value = "";
   })
 
-  const mainNav = document.getElementsByClassName("js-menu");
-  const navBarToggle = document.getElementById("js-navbar-toggle");
-
-  navBarToggle.addEventListener("click", function () {
-    for (let i = 0; i < mainNav.length; ++i) {
-      const item = mainNav[i];
-      item.classList.toggle("active");
-    }
-  });
-
-
   const parser = new Parser({
     colors: data.colors,
     tags: data.tags,

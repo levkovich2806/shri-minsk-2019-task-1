@@ -8,13 +8,16 @@
   <title>Заметки - Левкович С. Н.</title>
 </head>
 
-<body>
+<body class="body">
   <nav class="navbar">
-    <span class="navbar-toggle" id="js-navbar-toggle">
-      <i class="fas fa-bars"></i>
-    </span>
-    <!-- <a href="#" class="logo"><span class="logo__corporate">Яндекс</span> Домашка</a> -->
+    <label class="header__checkbox-label" for="menu-checkbox">
+      <span class="navbar-toggle" id="js-navbar-toggle">
+        <i class="fas fa-bars"></i>
+      </span>
+    </label>
+    
     <a href="#" class="logo"><img src="./images/logo.svg"></a>
+    <input class="header__checkbox" id="menu-checkbox" type="checkbox" hidden="">
     <div class="js-menu">
       <span class="search">
         <input type="text" class="search__text" placeholder="Поиск">
@@ -27,6 +30,7 @@
         <a href="" class="action action__btn">Добавить</a>
       </span>
     </div>
+    
   </nav>
 
   <div class="notes">
