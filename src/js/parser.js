@@ -189,16 +189,23 @@ export default function Parser({ colors, tags }) {
   this.getBottom = () => {
     const { attachments } = this.currentNote;
     if (attachments) {
-      this.currentNoteHtml += `<div class="bottom">`;
+      let isBottom = false;
+      let links = "";
+      let images = "";
       if (attachments[0] && attachments[0].type === "link") {
-        this.currentNoteHtml += this.getBottomLinks(attachments);
+        links = this.getBottomLinks(attachments);
+        isBottom = true;
       }
       if (attachments[0] && attachments[0].type === "image") {
-
-        this.currentNoteHtml += this.getBottomImages(attachments);
-
+        images = this.getBottomImages(attachments);
+        isBottom = true;
       }
-      this.currentNoteHtml += `</div>`;
+      if (isBottom) {
+        this.currentNoteHtml += `<div class="bottom">`;
+        this.currentNoteHtml += links;
+        this.currentNoteHtml += images;
+        this.currentNoteHtml += `</div>`;
+      }
     }
   };
 
