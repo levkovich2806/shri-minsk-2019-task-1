@@ -1,13 +1,15 @@
 //import { Item } from './interfaces/index';
+import { Note } from './interfaces/Note';
 
 export default class Notes {
 
+  notes: Array<Note> = [];
+
   getNoteSize(): string {
-    console.log("getNoteSize");
+    console.log("getNoteSize", this.notes);
     return "m";
   }
   addNote(): boolean {
-
     return true;
   }
 
@@ -15,7 +17,7 @@ export default class Notes {
     return [];
   }
 
-  static factory() {
-
+  static factory(data: Notes) {
+    console.log(data);
   }
 }

@@ -31,9 +31,11 @@ document.addEventListener('DOMContentLoaded', function () {
     const note = parser.createNote(item);
     notesContainer[0].innerHTML += note;
   }, []);
+
+  Notes.factory(data.notes);
+
   const notes = new Notes;
   notes.getNoteSize();
-
 });
 
 function createTitleBlock({ color }) {
