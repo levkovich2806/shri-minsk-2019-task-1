@@ -1,5 +1,6 @@
 import Parser from './parser';
 import data from './shri';
+import Notes from '../ts/notes.ts';
 
 document.addEventListener('DOMContentLoaded', function () {
 
@@ -29,8 +30,9 @@ document.addEventListener('DOMContentLoaded', function () {
   data.notes.forEach((item) => {
     const note = parser.createNote(item);
     notesContainer[0].innerHTML += note;
-    //return notes.concat(note);
   }, []);
+  const notes = new Notes;
+  notes.getNoteSize();
 
 });
 

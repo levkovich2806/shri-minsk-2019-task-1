@@ -54,6 +54,11 @@ module.exports = {
             outputPath: 'fonts/'
           }
         }]
+      },
+      {
+        test: /\.tsx?$/,
+        use: 'ts-loader',
+        exclude: /node_modules/
       }
     ]
   },
