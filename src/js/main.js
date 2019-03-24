@@ -1,9 +1,33 @@
-import Parser from './parser';
 import data from './shri';
 import Notes from '../ts/notes.ts';
+import { cloneDeep } from 'lodash';
+import { createRandomNote } from './helper';
 
 document.addEventListener('DOMContentLoaded', function () {
 
+  initPage();
+
+  Notes.factory(data);
+  const notes = new Notes;
+  notes.generateNotesHtml();
+
+  const btnAdd = document.getElementById("btnAdd");
+  btnAdd.addEventListener("click", (e) => {
+    e.preventDefault();
+    //Показываем модалку с формой для добавления новой заметки, пока сдесь будем вызывать статическое добавление
+    const newNote = createRandomNote();
+    data.notes = data.notes.concat(newNote);
+    notes.addNote(newNote);
+  });
+});
+
+function createTitleBlock({ color }) {
+  return `
+    <div class="block" style="background-color: ${color}"></div>
+  `;
+}
+
+function initPage() {
   const mainNav = document.getElementsByClassName("js-menu");
   const navBarToggle = document.getElementById("js-navbar-toggle");
 
@@ -14,32 +38,9 @@ document.addEventListener('DOMContentLoaded', function () {
     }
   });
 
-
-  const parser = new Parser({
-    colors: data.colors,
-    tags: data.tags,
-  });
-
-  const notesContainer = document.getElementsByClassName("notes__content");
   const notesBlocks = document.getElementsByClassName("notes__title_blocks");
 
   data.colors.forEach((color) => {
     notesBlocks[0].innerHTML += createTitleBlock(color);
-  })
-
-  data.notes.forEach((item) => {
-    const note = parser.createNote(item);
-    notesContainer[0].innerHTML += note;
-  }, []);
-
-  Notes.factory(data.notes);
-
-  const notes = new Notes;
-  notes.getNoteSize();
-});
-
-function createTitleBlock({ color }) {
-  return `
-    <div class="block" style="background-color: ${color}"></div>
-  `;
+  });
 }
