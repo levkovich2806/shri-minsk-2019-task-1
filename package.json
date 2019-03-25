@@ -10,6 +10,7 @@
     "start": "webpack-dev-server --mode development --open",
     "clear": "del-cli dist",
     "eslint": "eslint src/js/*.js",
+    "tslint": "tslint \"src/**/*.{ts,tsx}\" --config tslint.json",
     "stylelint": "stylelint 'src/scss/*.scss' --config ./.stylelintrc.json"
   },
   "repository": {
@@ -71,6 +72,8 @@
     "stylelint-config-standard": "^18.2.0",
     "stylelint-webpack-plugin": "^0.10.5",
     "ts-loader": "^5.3.3",
+    "tslint": "^5.14.0",
+    "tslint-react": "^3.6.0",
     "typescript": "^3.3.4000",
     "webpack": "^4.29.6",
     "webpack-cli": "^3.2.3",

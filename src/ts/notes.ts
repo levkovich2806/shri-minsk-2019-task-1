@@ -66,7 +66,35 @@ export default class Notes {
     return cloneDeep(notesData.notes);
   }
 
+  /**
+   * Фильтр массива заметок
+   * @param filterName - имя "ключа" заметки (Note)
+   * @param value - значение фильтра
+   */
+  filter(filterName: string, value: string | number): Array<Note> {
+    const array = this.toArray();
+    //let result: Array<Note> = [];
+    let result = array.filter((item: any) => {
+      // Если типом фильтра является строка, то ищем ее вхождение
+      if (typeof value === "string") {
+        if (filterName in item) {
+          if (item[filterName].includes(value)) {
+            return item;
+          }
+        }
+      }
+      // Если типом фильтра является число, то применяем строгое сравнение
+      else {
+        if (item[filterName] === value) {
+          return item;
+        }
+      }
+    });
+    return result;
+  }
+
   static factory(data: NotesCollection) {
+    console.log(data);
     notesData = data;
   }
 }
