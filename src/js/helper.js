@@ -1,16 +1,16 @@
 import { includes } from 'lodash';
 
-export function createRandomNote() {
+export default function createRandomNote() {
   const types = [
     "list",
     "text",
     "image",
   ];
-  const sizes = [
-    "s",
-    "m",
-    "l",
-  ];
+  // const sizes = [
+  //   "s",
+  //   "m",
+  //   "l",
+  // ];
 
   const attachments = [
     [
@@ -24,7 +24,7 @@ export function createRandomNote() {
   const getRandomColor = () => {
     const length = 7;
     return Math.floor(Math.random() * (length - 0)) + 0;
-  }
+  };
 
   const getRandomTags = () => {
     const length = 9;
@@ -41,25 +41,25 @@ export function createRandomNote() {
     }
 
     return tags;
-  }
+  };
 
   const getRandomType = () => {
     const count = Math.floor(Math.random() * (3 - 0)) + 0;
     return types[count];
-  }
+  };
 
-  const getRandomSize = () => {
-    //Выставляем максимум на 1 больше, чем кол-во, что бы иногда получать undefined и в этой связи вообще не передавать размер
-    // для того, что бы тестировать getNoteSize
-    const count = Math.floor(Math.random() * (4 - 0)) + 0;
-    return sizes[count];
-  }
+  // const getRandomSize = () => {
+  //   //Выставляем максимум на 1 больше, чем кол-во, что бы иногда получать undefined и в этой связи вообще не передавать размер
+  //   // для того, что бы тестировать getNoteSize
+  //   const count = Math.floor(Math.random() * (4 - 0)) + 0;
+  //   return sizes[count];
+  // };
 
   let note = {
     created: new Date().getTime(),
     color: getRandomColor(),
     tags: getRandomTags(),
-  }
+  };
 
   const type = getRandomType();
   if (type === "list") {
@@ -89,13 +89,14 @@ export function createRandomNote() {
       { text: "Пельмени", checked: true },
       { text: "Сметана", checked: true },
     ];
-    note.items = items;
+    const randomItemLength = Math.floor(Math.random() * (items.length - 0)) + 0;
+    note.items = items.slice(0, randomItemLength);
   } else if (type === "image") {
     note.url = "https://avatars.mds.yandex.net/get-pdb/1534889/a869b7ef-32da-41e7-8703-326ae860e67f/orig";
   } else if (type === "text") {
     let resultText = "";
     const randomTextLength = Math.floor(Math.random() * (50 - 0)) + 0;
-    const text = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
+    const text = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.";
     const worlds = text.split(" ");
     for (let i = 0; i < randomTextLength; i++) {
       resultText += ` ${worlds[i]}`;
@@ -118,10 +119,12 @@ export function createRandomNote() {
     for (let i = 0; i < attachmentsCount; i++) {
       attachmentsList = attachmentsList.concat(attachmentValue);
     }
-    note.attachments = attachmentsList;
+    if (attachmentsList.length > 0) {
+      note.attachments = attachmentsList;
+    }
   }
 
-  const randomReminder = Math.floor(Math.random() * (2 - 0)) + 0;;
+  const randomReminder = Math.floor(Math.random() * (2 - 0)) + 0;
   if (randomReminder) {
     note.reminder = new Date().getTime() - 5 * 68400 * 1000;
   }

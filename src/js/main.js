@@ -1,20 +1,18 @@
 import data from './shri';
 import Notes from '../ts/notes.ts';
-import { cloneDeep } from 'lodash';
-import { createRandomNote } from './helper';
+import createRandomNote from './helper';
 
 document.addEventListener('DOMContentLoaded', function () {
 
   initPage();
 
-  Notes.factory(data);
-  const notes = new Notes;
+  const notes = Notes.factory(data);
   notes.generateNotesHtml();
 
   const btnAdd = document.getElementById("btnAdd");
   btnAdd.addEventListener("click", (e) => {
     e.preventDefault();
-    //Показываем модалку с формой для добавления новой заметки, пока сдесь будем вызывать статическое добавление
+    //Показываем модалку с формой для добавления новой заметки, пока сдесь будем вызывать статическое добавление рандомной заметки
     const newNote = createRandomNote();
     data.notes = data.notes.concat(newNote);
     notes.addNote(newNote);

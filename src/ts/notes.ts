@@ -3,27 +3,42 @@ import Parser from '../js/parser';
 import NotesCollection from './interfaces/NotesCollecion';
 import Note from './interfaces/Note';
 
-import { cloneDeep } from 'lodash';
-
-//Будем хранить всё по заметкам здесь
-let notesData: NotesCollection = {
-  tags: [],
-  colors: [],
-  notes: [],
-};
+import { cloneDeep, includes, max } from 'lodash';
+import Color from './interfaces/Color';
+import Tag from './interfaces/Tag';
 
 export default class Notes {
 
   private notesContainerClass: string = "notes__content";
 
-  generateNotesHtml() {
-    const { colors, tags, notes } = notesData;
+  private notes: Note[] = [];
+  private colors: Color[] = [];
+  private tags: Tag[] = [];
+
+  private notesData: NotesCollection = {
+    notes: this.notes,
+    colors: this.colors,
+    tags: this.tags,
+  };
+
+  private constructor(notesInfo: NotesCollection) {
+    this.notesData.notes = notesInfo.notes;
+    this.notesData.colors = notesInfo.colors;
+    this.notesData.tags = notesInfo.tags;
+  }
+
+  static factory(notes: NotesCollection): Notes {
+    return new Notes(notes);
+  }
+
+  generateNotesHtml(notes: Note[] = this.toArray()) {
+    const notesContainer = document.getElementsByClassName(this.notesContainerClass);
+    const { colors, tags } = this.notesData;
     const parser = new Parser({
       colors,
       tags,
     });
-    const notesContainer = document.getElementsByClassName(this.notesContainerClass);
-    notesContainer[0].innerHTML = "";
+
     const notesForParse = cloneDeep(notes);
     notesForParse.forEach((item) => {
       const note = parser.createNote(item);
@@ -31,39 +46,95 @@ export default class Notes {
     });
   };
 
+  /**
+   * Вычисляет размер заметки по данным заметки
+   * @param note - объект заметки
+   */
+
   private getNoteSize(note: Note): string {
-    const { type, tags, text, attachment } = note;
+    const { type, tags, text, attachment, items } = note;
+
+    //l = 2, m = 1, s = 1
+
+    let sizes: number[] = [0];
+
     if (type === "list") {
-      return "l";
-    } else if (type === "image") {
-      return "m";
-    } else if (type === "text") {
-      if (text && text.length > 150) {
-        return "m";
+      if (items) {
+        const itemLength = items.length;
+        if (itemLength > 20) {
+          sizes.push(2);
+        } else {
+          sizes.push(1);
+        }
       }
-      if (tags && tags.length > 5) {
-        return "m";
-      }
-      if (attachment && attachment.length > 3) {
-        return "m";
-      }
-      return "s";
     }
-    return "m";
+    if (type === "image") {
+      sizes.push(1);
+    }
+    if (type === "text") {
+      if (text) {
+        let textLength = text.length;
+        if (textLength > 450) {
+          sizes.push(2);
+        } else if (textLength > 150) {
+          sizes.push(1);
+        }
+      }
+    }
+
+    if (tags && tags.length > 5) {
+      sizes.push(1);
+    }
+    if (attachment && attachment.length > 3) {
+      sizes.push(1);
+    }
+
+    let max = 0;
+    let mediumCount = 0;
+    for (let i = 0; i < sizes.length; i++) {
+      if (max < sizes[i]) {
+        max = sizes[i];
+      }
+      if (sizes[i] === 1) {
+        mediumCount++;
+      }
+    }
+
+    if (mediumCount > 2) {
+      return 'l';
+    }
+
+    switch (max) {
+      case 0:
+        return "s";
+      case 1:
+        return "m";
+      case 2:
+        return "l";
+      default:
+        return "m";
+    }
   }
 
+  /**
+   * Добавление заметки
+   * @param note - объект заметки
+   */
   addNote(note: Note): boolean {
-    let { notes } = notesData;
+    let { notes } = this.notesData;
     if (!note.size) {
       note.size = this.getNoteSize(note);
     }
-    notes = notes.concat(note);
-    this.generateNotesHtml();
+    this.notesData = {
+      ...this.notesData, notes: notes.concat(note)
+    };
+    this.generateNotesHtml([note]);
     return true;
   }
 
   toArray(): Array<Note> {
-    return cloneDeep(notesData.notes);
+    const { notes } = this.notesData;
+    return cloneDeep(notes);
   }
 
   /**
@@ -73,28 +144,60 @@ export default class Notes {
    */
   filter(filterName: string, value: string | number): Array<Note> {
     const array = this.toArray();
-    //let result: Array<Note> = [];
-    let result = array.filter((item: any) => {
+    const result = array.filter((item: Note) => {
       // Если типом фильтра является строка, то ищем ее вхождение
       if (typeof value === "string") {
-        if (filterName in item) {
-          if (item[filterName].includes(value)) {
-            return item;
-          }
+        switch (filterName) {
+          case "type":
+            if (item.type.includes(value)) {
+              return item;
+            }
+          case "title":
+            if (item.title && item.title.includes(value)) {
+              return item;
+            }
+          case "size":
+            if (item.size && item.size.includes(value)) {
+              return item;
+            }
+          case "text":
+            if (item.text && item.text.includes(value)) {
+              return item;
+            }
         }
       }
-      // Если типом фильтра является число, то применяем строгое сравнение
+      // Если типом фильтра является число, то применяем строгое сравнение или вхождение в массив
       else {
-        if (item[filterName] === value) {
-          return item;
+        switch (filterName) {
+          case "color":
+            if (item.color && item.color === value) {
+              return item;
+            }
+          case "created":
+            if (item.created && item.created === value) {
+              return item;
+            }
+          case "reminder":
+            if (item.reminder && item.reminder === value) {
+              return item;
+            }
+          case "tag":
+            if (item.tags && includes(item.tags, value)) {
+              return item;
+            }
         }
       }
     });
     return result;
   }
 
-  static factory(data: NotesCollection) {
-    console.log(data);
-    notesData = data;
+  remove(num: number) {
+    if (this.notesData.notes[num]) {
+      this.notesData.notes.splice(num, 1);
+    }
+  }
+
+  toArchive(num: number) {
+    this.notesData.notes[num].status = 0;
   }
 }

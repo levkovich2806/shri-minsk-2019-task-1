@@ -11,4 +11,5 @@ export default interface Note {
   attachment?: Attachment[];
   created: number;
   reminder?: number;
+  status?: number; //Задел на 3 домашку - если 1, то активная, если 0, то архивная
 }
