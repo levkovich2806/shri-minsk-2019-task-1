@@ -31,6 +31,10 @@
     "*.{css,scss}": [
       "stylelint",
       "git add"
+    ],
+    "*.{ts,tsx}": [
+      "tslint",
+      "git add"
     ]
   },
   "author": "Sergey Levkovich",
