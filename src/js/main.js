@@ -1,12 +1,13 @@
 import data from './shri';
-import Notes from '../ts/notes.ts';
+import Notes from '../ts/Notes.ts';
+import NotesColl from '../ts/NotesColl.ts';
 import createRandomNote from './helper';
 
 document.addEventListener('DOMContentLoaded', function () {
 
   initPage();
 
-  const notes = Notes.factory(data);
+  const notes = NotesColl.factory(data);
   notes.generateNotesHtml();
 
   const btnAdd = document.getElementById("btnAdd");

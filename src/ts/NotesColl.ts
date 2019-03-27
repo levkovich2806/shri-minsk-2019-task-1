@@ -1,17 +1,50 @@
+//import { Item } from './interfaces/index';
+import Parser from '../js/parser';
+import NotesCollection from './interfaces/NotesCollecion';
 import Note from './interfaces/Note';
-import { cloneDeep, includes } from 'lodash';
 
-export default class Notes {
+import { cloneDeep, includes } from 'lodash';
+import Color from './interfaces/Color';
+import Tag from './interfaces/Tag';
+
+export default class NotesColl {
+
+  private notesContainerClass: string = "notes__content";
 
   private notes: Note[] = [];
+  private colors: Color[] = [];
+  private tags: Tag[] = [];
 
-  private constructor(notes: Note[]) {
-    this.notes = notes;
+  private notesData: NotesCollection = {
+    notes: this.notes,
+    colors: this.colors,
+    tags: this.tags,
+  };
+
+  private constructor(notesInfo: NotesCollection) {
+    this.notesData.notes = notesInfo.notes;
+    this.notesData.colors = notesInfo.colors;
+    this.notesData.tags = notesInfo.tags;
   }
 
-  static factory(notes: Note[]): Notes {
-    return new Notes(notes);
+  static factory(notes: NotesCollection): NotesColl {
+    return new NotesColl(notes);
   }
+
+  generateNotesHtml(notes: Note[] = this.toArray()) {
+    const notesContainer = document.getElementsByClassName(this.notesContainerClass);
+    const { colors, tags } = this.notesData;
+    const parser = new Parser({
+      colors,
+      tags,
+    });
+
+    const notesForParse = cloneDeep(notes);
+    notesForParse.forEach((item) => {
+      const note = parser.createNote(item);
+      notesContainer[0].innerHTML += note;
+    });
+  };
 
   /**
    * Вычисляет размер заметки по данным заметки
@@ -87,15 +120,21 @@ export default class Notes {
    * Добавление заметки
    * @param note - объект заметки
    */
-  addNote(note: Note): void {
+  addNote(note: Note): boolean {
+    let { notes } = this.notesData;
     if (!note.size) {
       note.size = this.getNoteSize(note);
     }
-    this.notes = this.notes.concat(note);
+    this.notesData = {
+      ...this.notesData, notes: notes.concat(note)
+    };
+    this.generateNotesHtml([note]);
+    return true;
   }
 
   toArray(): Array<Note> {
-    return cloneDeep(this.notes);
+    const { notes } = this.notesData;
+    return cloneDeep(notes);
   }
 
   /**
@@ -157,8 +196,8 @@ export default class Notes {
    * @param num - номер заметки для удаления
    */
   remove(num: number) {
-    if (this.notes[num]) {
-      this.notes.splice(num, 1);
+    if (this.notesData.notes[num]) {
+      this.notesData.notes.splice(num, 1);
     }
   }
 
@@ -167,6 +206,6 @@ export default class Notes {
    * @param num - номер заметки для изменения ее статус
    */
   toArchive(num: number) {
-    this.notes[num].status = 0;
+    this.notesData.notes[num].status = 0;
   }
 }
