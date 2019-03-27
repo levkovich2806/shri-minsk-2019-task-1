@@ -7,8 +7,11 @@ document.addEventListener('DOMContentLoaded', function () {
 
   initPage();
 
-  const notes = NotesColl.factory(data);
-  notes.generateNotesHtml();
+  const notes = Notes.factory(data.notes);
+
+  for (let i of notes) {
+    console.log(i);
+  }
 
   const btnAdd = document.getElementById("btnAdd");
   btnAdd.addEventListener("click", (e) => {

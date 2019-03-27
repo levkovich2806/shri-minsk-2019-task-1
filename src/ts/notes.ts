@@ -13,6 +13,10 @@ export default class Notes {
     return new Notes(notes);
   }
 
+  [Symbol.iterator]() {
+    return this.notes.values();
+  }
+
   /**
    * Вычисляет размер заметки по данным заметки
    * @param note - объект заметки
