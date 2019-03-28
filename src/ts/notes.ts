@@ -25,65 +25,45 @@ export default class Notes {
   private getNoteSize(note: Note): string {
     const { type, tags, text, attachment, items } = note;
 
-    //l = 2, m = 1, s = 1
-
-    let sizes: number[] = [0];
+    let mediumCount: number = 0;
 
     if (type === "list") {
       if (items) {
         const itemLength = items.length;
         if (itemLength > 20) {
-          sizes.push(2);
+          return "l";
         } else {
-          sizes.push(1);
+          mediumCount++;
         }
       }
     }
     if (type === "image") {
-      sizes.push(1);
+      mediumCount++;
     }
     if (type === "text") {
       if (text) {
         let textLength = text.length;
         if (textLength > 450) {
-          sizes.push(2);
+          return "l";
         } else if (textLength > 150) {
-          sizes.push(1);
+          mediumCount++;
         }
       }
     }
 
     if (tags && tags.length > 5) {
-      sizes.push(1);
+      mediumCount++;
     }
     if (attachment && attachment.length > 3) {
-      sizes.push(1);
-    }
-
-    let max = 0;
-    let mediumCount = 0;
-    for (let i = 0; i < sizes.length; i++) {
-      if (max < sizes[i]) {
-        max = sizes[i];
-      }
-      if (sizes[i] === 1) {
-        mediumCount++;
-      }
+      mediumCount++;
     }
 
     if (mediumCount > 2) {
       return 'l';
-    }
-
-    switch (max) {
-      case 0:
-        return "s";
-      case 1:
-        return "m";
-      case 2:
-        return "l";
-      default:
-        return "m";
+    } else if (mediumCount > 0) {
+      return 'm';
+    } else {
+      return 's';
     }
   }
 
