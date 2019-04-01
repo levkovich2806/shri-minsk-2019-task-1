@@ -1,5 +1,14 @@
 import Parser from './parser';
-import data from './shri';
+import staticData from './shri';
+import {
+  getNotes,
+  getArchiveNotes,
+  getNotesByColor,
+  addNote,
+  deleteNote,
+  updateNote,
+  changeNoteStatus,
+} from '../service/main';
 
 document.addEventListener('DOMContentLoaded', function () {
 
@@ -7,27 +16,84 @@ document.addEventListener('DOMContentLoaded', function () {
   const search = document.getElementsByClassName("search__text");
   clearBtn[0].addEventListener("click", () => {
     search[0].value = "";
-  })
+  });
+
+  getNotes()
+    .then(data => initPage(data));
+
+  //getNotesByColor({
+  //  payload: {
+  //    color: 1,
+  //  }
+  //});
+
+  // const newNote = {
+  //   "type": "list",
+  //   "title": "Не забыть выгулять Сиба-Ину 12",
+  //   "color": 3,
+  //   "created": 1520160803000,
+  //   items: [
+  //     "1", "2", "3", "4"
+  //   ]
+  // };
+
+  // addNote({
+  //   payload: {
+  //     card: newNote,
+  //   }
+  // }).then(() => getNotes());
+
+  // deleteNote({
+  //   payload: {
+  //     id: 10,
+  //   }
+  // });
+
+  // updateNote({
+  //   payload: {
+  //     note: newNote,
+  //     id: 8,
+  //   }
+  // });
+
+  // changeNoteStatus({
+  //   payload: {
+  //     id: 5,
+  //     inArchive: true,
+  //   }
+  // });
+
+});
+
+function initPage(notesData) {
+  const mainNav = document.getElementsByClassName('js-menu');
+  const navBarToggle = document.getElementById('js-navbar-toggle');
+
+  navBarToggle.addEventListener('click', function () {
+    for (let i = 0; i < mainNav.length; ++i) {
+      const item = mainNav[i];
+      item.classList.toggle('active');
+    }
+  });
 
   const parser = new Parser({
-    colors: data.colors,
-    tags: data.tags,
+    colors: staticData.colors,
+    tags: staticData.tags,
   });
 
   const notesContainer = document.getElementsByClassName("notes__content");
   const notesBlocks = document.getElementsByClassName("notes__title_blocks");
 
-  data.colors.forEach((color) => {
+  staticData.colors.forEach((color) => {
     notesBlocks[0].innerHTML += createTitleBlock(color);
   })
 
-  data.notes.forEach((item) => {
+  notesData.forEach((item) => {
     const note = parser.createNote(item);
     notesContainer[0].innerHTML += note;
-    //return notes.concat(note);
   }, []);
 
-});
+}
 
 function createTitleBlock({ color }) {
   return `
