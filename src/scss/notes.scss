@@ -108,8 +108,11 @@ Content НАЧАЛО - основной DIV заметки
   z-index: 100;
   height: 100%;
   &__header {
-    line-height: 28px;
     font-size: 24px;
+    line-height: 28px;
+    max-height: 52px;
+    overflow: hidden;
+    text-overflow: ellipsis;
     font-weight: bold;
     margin-bottom: 15px;
   }
