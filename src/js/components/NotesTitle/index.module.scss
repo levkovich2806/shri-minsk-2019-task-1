@@ -1,0 +1,17 @@
+.title {
+  margin-left: 20px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-start;
+
+  &_text {
+    font-size: 36px;
+    line-height: 42px;
+  }
+
+  &_blocks {
+    display: flex;
+    flex-direction: row;
+  }
+}

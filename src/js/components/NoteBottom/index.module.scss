@@ -1,0 +1,26 @@
+.bottom {
+  position: relative;
+  margin-top: -16px;
+  background-color: rgba(216, 216, 216, 0.5);
+  border-bottom-left-radius: 16px;
+  border-bottom-right-radius: 16px;
+  padding: 28px 24px 12px 24px;
+  z-index: 1;
+}
+
+.images {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  &__content {
+    align-self: flex-end;
+    display: flex;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+
+    &::-webkit-scrollbar {
+      display: none;
+    }
+  }
+}

@@ -1,13 +1,12 @@
-import barssolid from './images/barssolid.svg';
-import img24x20 from './images/img24x20.png';
-import link24 from './images/link24.png';
-import reminder20 from './images/reminder20.png';
-import logo from './images/logo.svg';
-import '@fortawesome/fontawesome-free/js/fontawesome'
-import '@fortawesome/fontawesome-free/js/solid'
-import '@fortawesome/fontawesome-free/js/regular'
-import '@fortawesome/fontawesome-free/js/brands'
+import React from "react";
+import { render } from "react-dom";
+import { Provider } from "react-redux";
+import store from "./js/store/index";
+import App from "./js/components/App";
 
-import './js/main';
-
-import './scss/main.scss';
+render(
+  <Provider store={store}>
+    <App />
+  </Provider>,
+  document.getElementById("root")
+);

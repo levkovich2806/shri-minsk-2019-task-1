@@ -1,0 +1,47 @@
+.action {
+  font-family: Helvetica, Arial, sans-serif;
+  text-decoration: none;
+  align-self: center;
+  text-align: center;
+  margin-bottom: 20px;
+  color: rgba(51, 51, 51, 0.6);
+  width: 100%;
+  cursor: pointer;
+
+  &__active {
+    color: #333;
+  }
+
+  &__btn {
+    background-color: #fc0;
+    border-radius: 4px;
+    padding: 10px 15px;
+    color: #333;
+    transition: background-color 0.5s;
+  }
+
+  &__btn:hover {
+    background-color: #ffd735;
+  }
+
+  &__btn:active {
+    background-color: #ffe993;
+  }
+}
+
+.active {
+  display: flex;
+  position: absolute;
+  top: 65px;
+  background-color: white;
+  z-index: 999;
+  width: calc(100% - 40px);
+  padding: 20px;
+}
+
+@media (min-width: 1100px) {
+  .action {
+    margin-left: 32px;
+    margin-top: 18px;
+  }
+}

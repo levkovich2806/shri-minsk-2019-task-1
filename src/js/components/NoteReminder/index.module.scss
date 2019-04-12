@@ -1,0 +1,21 @@
+.reminder {
+  position: relative;
+  display: flex;
+  align-items: center;
+  background-color: #db5341;
+  border-top-left-radius: 16px;
+  border-top-right-radius: 16px;
+  padding: 12px 24px 26px 24px;
+  z-index: 1;
+
+  &__image {
+    margin-right: 16px;
+  }
+
+  &__text {
+    color: white;
+    line-height: 24px;
+    font-size: 18px;
+    font-weight: bold;
+  }
+}
