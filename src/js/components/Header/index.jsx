@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import classnames from "classnames";
 import Logo from "../Logo";
 import Search from "../Search";
 import Action from "../Action";
@@ -21,7 +22,7 @@ class Header extends Component {
               focusable="false"
               data-prefix="fas"
               data-icon="bars"
-              class="svg-inline--fa fa-bars fa-w-14"
+              className={classnames("svg-inline--fa", "fa-bars", "fa-w-14")}
               role="img"
               xmlns="http://www.w3.org/2000/svg"
               viewBox="0 0 448 512"
