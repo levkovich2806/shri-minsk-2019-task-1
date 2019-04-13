@@ -2,7 +2,7 @@
   position: relative;
   height: 32px;
   width: 32px;
-  padding-left: 16px;
+  margin-left: 16px;
   cursor: pointer;
   line-height: 22px;
   font-size: 18px;
@@ -68,6 +68,8 @@
   .container {
     width: 48px;
     height: 48px;
+    flex: 0 0 auto;
+    margin-right: 3px;
   }
 
   .checkmark {
