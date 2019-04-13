@@ -5,8 +5,8 @@ const utils = require("../utils/utils");
  */
 const get_cards_list = ({ query }) => {
   let data = getUsedCards();
-  if (query && query.filter) {
-    data = getFilteredData(query.filter);
+  if (query && query.colors) {
+    data = getFilteredData(query.colors);
   }
 
   return new Promise((resolve, reject) => {
@@ -28,17 +28,9 @@ const get_cards_list = ({ query }) => {
 /**
  * Возвращаем отфильтрованный список заметок
  */
-const getFilteredData = ({ filterName = "", filterValue = "" }) => {
+const getFilteredData = colors => {
   const cards = getUsedCards();
-  const valueType = getFilterValueType(filterName);
-  return cards.filter(item => {
-    if (valueType === "string") {
-      return item[filterName].inclide(filterValue);
-    } else if (valueType === "number") {
-      return item[filterName] === Number(filterValue);
-    }
-    return false;
-  });
+  return cards.filter(item => colors.includes(String(item.color)));
 };
 
 /**
@@ -54,20 +46,6 @@ const getUsedCards = () => {
  */
 const getCards = () => {
   return global.cardsData.notes;
-};
-
-/**
- * По имени фильтра возвращаем тип его значения
- */
-const getFilterValueType = filterName => {
-  switch (filterName) {
-    case "color":
-      return "number";
-    case "text":
-      return "string";
-    default:
-      return "number";
-  }
 };
 
 /**

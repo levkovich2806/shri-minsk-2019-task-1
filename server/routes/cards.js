@@ -14,15 +14,15 @@ router.get("/", (req, res) => {
 
   if (requestKeys.length > 0) {
     const { color } = req.query;
+
     if (color) {
-      if (!utils.checkColorCorrect(color)) {
+      const colors = color.split(",");
+      const colorTest = colors.every(color => utils.checkColorCorrect(color));
+      if (!colorTest) {
         return res.status(400).send("Incorrect color");
       }
       query = {
-        filter: {
-          filterName: "color",
-          filterValue: color
-        }
+        colors
       };
     }
   }
