@@ -95,3 +95,25 @@ router.get("/archive", (req, res) => {
       return res.status(status).send(error);
     });
 });
+
+router.get("/tags", (req, res) => {
+  cards
+    .getCardTags()
+    .then(({ data, status }) => {
+      return res.status(status).json(data);
+    })
+    .catch(({ error, status }) => {
+      return res.status(status).send(error);
+    });
+});
+
+router.get("/colors", (req, res) => {
+  cards
+    .getCardColors()
+    .then(({ data, status }) => {
+      return res.status(status).json(data);
+    })
+    .catch(({ error, status }) => {
+      return res.status(status).send(error);
+    });
+});

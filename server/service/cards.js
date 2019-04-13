@@ -162,10 +162,48 @@ const getCardArchive = () => {
   });
 };
 
+const getCardTags = () => {
+  return new Promise((resolve, reject) => {
+    setTimeout(() => {
+      const tags = global.cardsData.tags;
+      if (tags) {
+        resolve({
+          status: 200,
+          data: tags
+        });
+      }
+      reject({
+        status: 500,
+        error: "Ошибка получения архива"
+      });
+    }, 1000);
+  });
+};
+
+const getCardColors = () => {
+  return new Promise((resolve, reject) => {
+    setTimeout(() => {
+      const colors = global.cardsData.colors;
+      if (colors) {
+        resolve({
+          status: 200,
+          data: colors
+        });
+      }
+      reject({
+        status: 500,
+        error: "Ошибка получения архива"
+      });
+    }, 1000);
+  });
+};
+
 module.exports = {
   get_cards_list,
   deleteCard,
   addCard,
   updateCard,
-  getCardArchive
+  getCardArchive,
+  getCardTags,
+  getCardColors
 };
