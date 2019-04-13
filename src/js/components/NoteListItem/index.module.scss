@@ -1,7 +1,7 @@
 .container {
   position: relative;
   padding-left: 28px;
-  margin-right: 12px;
+
   margin-bottom: 12px;
   cursor: pointer;
   line-height: 22px;
@@ -30,11 +30,11 @@
   border-radius: 3px;
 }
 
-.container:hover input ~ .checkmark {
+.container:hover input~.checkmark {
   background-color: #ccc;
 }
 
-.container input:checked ~ .checkmark {
+.container input:checked~.checkmark {
   background-color: #fc0;
 }
 
@@ -56,10 +56,10 @@
   transform: rotate(45deg);
 }
 
-.container input:checked ~ .checkmark::after {
+.container input:checked~.checkmark::after {
   display: block;
 }
 
-.container input:checked ~ span {
+.container input:checked~span {
   text-decoration: line-through;
 }

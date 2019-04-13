@@ -1,14 +1,15 @@
 import React, { Component } from "react";
-import Tags from "../NoteTags";
+import NoteTags from "../NoteTags";
 import classnames from "classnames";
 import styles from "./index.module.scss";
 import NoteActions from "../NoteActions";
 import moment from "moment";
+import { connect } from 'react-redux';
 
 class NoteBlock extends Component {
   getBgStyle = () => {
-    const { color, colors = { 0: "#ffffff" } } = this.props;
-    return colors[color] ? colors[color] : "#ffffff";
+    const { color, colorsHash = { 0: "#ffffff" } } = this.props;
+    return colorsHash[color] ? colorsHash[color].color : "#ffffff";
   };
 
   getReadableDate = date => {
@@ -68,7 +69,7 @@ class NoteBlock extends Component {
         {content && content}
         {text && <div className={styles.content__description}>{text}</div>}
         <div className={styles.content__footer}>
-          {tags && <Tags tags={tags} />}
+          {tags && <NoteTags tags={tags} />}
           {blockType !== "top" && (
             <div className={styles.content__footer_bottom}>
               <div>
@@ -87,4 +88,8 @@ class NoteBlock extends Component {
   }
 }
 
-export default NoteBlock;
+export default connect(
+  state => ({
+    colorsHash: state.notes.colorsHash,
+  })
+)(NoteBlock);

@@ -8,6 +8,7 @@ class NoteContent extends Component {
   render() {
     const {
       title,
+      color,
       text,
       tags,
       reminder,
@@ -40,6 +41,7 @@ class NoteContent extends Component {
             <NoteBlock
               modificator={["listNotByu"]}
               title={title}
+              color={color}
               blockType={"top"}
               content={<NoteList items={items} />}
             />

@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { getNotes } from '../../actions/index'
+import { getNotesData } from '../../actions/index'
 import Note from "../Note";
 import NotesTitle from "../NotesTitle";
 import { connect } from 'react-redux';
@@ -9,18 +9,17 @@ import styles from "./index.module.scss";
 class Notes extends Component {
 
   componentDidMount = () => {
-    const { onGetNotes } = this.props;
-    onGetNotes();
+    const { onGetNotesData } = this.props;
+    onGetNotesData();
   }
 
   render() {
-    const { notes: { list } } = this.props;
-    console.log(list);
+    const { data: { notes } } = this.props;
     return (
       <div className={styles.notes}>
         <NotesTitle />
         <div className={styles.notes__content}>
-          {list.map(data => (
+          {notes.map(data => (
             <Note key={data.created} {...data} />
           ))}
         </div>
@@ -29,11 +28,9 @@ class Notes extends Component {
   }
 }
 
-//this.props.onAddNote();
-
 export default connect(
   state => ({
-    notes: state.notes,
+    data: state.notes,
   }),
   dispatch => ({
     onAddNote: (note) => {
@@ -42,8 +39,8 @@ export default connect(
         payload: note,
       })
     },
-    onGetNotes: () => {
-      dispatch(getNotes());
+    onGetNotesData: () => {
+      dispatch(getNotesData());
     }
   })
 )(Notes);

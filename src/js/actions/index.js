@@ -7,6 +7,23 @@ const NOTE_STATUS = {
 }
 
 /**
+ * Запрашиваем с сервера список заметок, тэгов, цветов (заметки - все кроме архивных)
+ */
+export const getNotesData = () => async dispatch => {
+
+  dispatch({ type: 'FETCH_ON_GET_NOTES_DATA_START' });
+
+  const data = await sendRequest({
+    url: `${API}/api/cards/data`,
+    params: {
+      method: "GET",
+    }
+  });
+  dispatch({ type: 'FETCH_ON_GET_NOTES_DATA_SUCCESS', payload: data });
+  dispatch({ type: 'FETCH_ON_GET_NOTES_DATA_STOP' });
+}
+
+/**
  * Запрашиваем с сервера список заметок (все кроме архивных)
  */
 export const getNotes = () => async dispatch => {
