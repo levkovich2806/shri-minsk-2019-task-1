@@ -15,9 +15,9 @@ class Notes extends Component {
   }
 
   render() {
-    const { data: { notes }, isLoading } = this.props;
+    const { data: { notes }, isLoadingMainData, isLoadingNotes } = this.props;
 
-    if (isLoading) {
+    if (isLoadingMainData) {
       return (
         <div className={styles.notes}>
           <SkeletonTheme color="#fff" highlightColor="#444">
@@ -30,11 +30,18 @@ class Notes extends Component {
     return (
       <div className={styles.notes}>
         <NotesTitle />
-        <div className={styles.notes__content}>
-          {notes.map(data => (
-            <Note key={data.created} {...data} />
-          ))}
-        </div>
+        {isLoadingNotes
+          ?
+          <SkeletonTheme color="#fff" highlightColor="#444">
+            <Skeleton width={300} height={42} />
+          </SkeletonTheme>
+          :
+          <div className={styles.notes__content}>
+            {notes.map(data => (
+              <Note key={data.created} {...data} />
+            ))}
+          </div>
+        }
       </div>
     );
   }
@@ -43,7 +50,8 @@ class Notes extends Component {
 export default connect(
   state => ({
     data: state.notes,
-    isLoading: state.notes.isLoadingMainData,
+    isLoadingMainData: state.notes.isLoadingMainData,
+    isLoadingNotes: state.notes.isLoadingNotes,
   }),
   dispatch => ({
     onAddNote: (note) => {

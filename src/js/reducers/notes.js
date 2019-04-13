@@ -27,7 +27,8 @@ function rootReducer(state = initialState, action) {
   if (action.type === FETCH_ON_GET_NOTES_START) {
     return {
       ...state,
-      isLoadingNotes: true
+      isLoadingNotes: true,
+      isArchive: false
     };
   } else if (action.type === FETCH_ON_GET_NOTES_SUCCESS) {
     return {
@@ -42,12 +43,13 @@ function rootReducer(state = initialState, action) {
   } else if (action.type === FETCH_ON_GET_ARCHIVE_START) {
     return {
       ...state,
-      isLoadingNotes: true
+      isLoadingNotes: true,
+      isArchive: true
     };
   } else if (action.type === FETCH_ON_GET_ARCHIVE_SUCCESS) {
     return {
       ...state,
-      archive: action.payload
+      notes: action.payload,
     };
   } else if (action.type === FETCH_ON_GET_ARCHIVE_STOP) {
     return {

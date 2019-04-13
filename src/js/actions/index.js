@@ -29,7 +29,7 @@ export const getNotes = (filters) => async dispatch => {
   dispatch({ type: "FETCH_ON_GET_NOTES_START" });
 
   let url = `${API}/api/cards`;
-  if (filters.length > 0) {
+  if (filters && filters.length > 0) {
     let filterList = filters.join(",");
     url += `?color=${filterList}`;
   }
@@ -51,7 +51,7 @@ export const getArchiveNotes = (filters) => async dispatch => {
   dispatch({ type: "FETCH_ON_GET_ARCHIVE_START" });
 
   let url = `${API}/api/cards/archive`;
-  if (filters.length > 0) {
+  if (filters && filters.length > 0) {
     let filterList = filters.join(",");
     url += `?color=${filterList}`;
   }
