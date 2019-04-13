@@ -11,7 +11,7 @@ class NotesTitle extends PureComponent {
     if (isLoading) {
       return (
         <div className={styles.title}>
-          <SkeletonTheme color="#fc0" highlightColor="#444">
+          <SkeletonTheme color="#fff" highlightColor="#444">
             <Skeleton width={300} height={42} />
           </SkeletonTheme>
         </div>
