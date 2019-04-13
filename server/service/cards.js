@@ -46,7 +46,7 @@ const getFilteredData = ({ filterName = "", filterValue = "" }) => {
  */
 const getUsedCards = () => {
   const cards = getCards();
-  return cards.filter(item => !item.status || item.status !== 0);
+  return cards.filter(item => item.status !== 0);
 };
 
 /**
@@ -201,7 +201,10 @@ const getCardColors = () => {
 const getData = () => {
   return new Promise((resolve, reject) => {
     setTimeout(() => {
-      const cardsData = global.cardsData;
+      let cardsData = {};
+      cardsData.colors = global.cardsData.colors;
+      cardsData.tags = global.cardsData.tags;
+      cardsData.notes = getUsedCards();
       if (cardsData) {
         resolve({
           status: 200,

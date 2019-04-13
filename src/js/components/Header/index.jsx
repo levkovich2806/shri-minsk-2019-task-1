@@ -1,5 +1,7 @@
 import React, { Component } from "react";
 import classnames from "classnames";
+import { connect } from "react-redux";
+import { getArchiveNotes, getNotes } from "../../actions";
 import Logo from "../Logo";
 import Search from "../Search";
 import Action from "../Action";
@@ -7,6 +9,8 @@ import styles from "./index.module.scss";
 
 class Header extends Component {
   render() {
+    const { onGetActiveNotes, onGetArchiveNotes } = this.props;
+
     return (
       <nav className={styles.navbar}>
         {/* Когда "починю "бургер" - надо вынести в отдельный компонент */}
@@ -47,9 +51,9 @@ class Header extends Component {
             <Action
               title="Активные"
               status="active"
-              onClick={this.showActive}
+              onClick={onGetActiveNotes}
             />
-            <Action title="Архив" onClick={this.showArchive} />
+            <Action title="Архив" onClick={onGetArchiveNotes} />
             <Action title="Добавить" status="btn" onClick={this.showModal} />
           </span>
         </div>
@@ -58,4 +62,16 @@ class Header extends Component {
   }
 }
 
-export default Header;
+export default connect(
+  state => ({
+    data: state.notes
+  }),
+  dispatch => ({
+    onGetActiveNotes: () => {
+      dispatch(getNotes());
+    },
+    onGetArchiveNotes: () => {
+      dispatch(getArchiveNotes());
+    }
+  })
+)(Header);
