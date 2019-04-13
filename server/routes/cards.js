@@ -16,14 +16,10 @@ router.get("/", (req, res) => {
     const { color } = req.query;
 
     if (color) {
-      const colors = color.split(",");
-      const colorTest = colors.every(color => utils.checkColorCorrect(color));
-      if (!colorTest) {
+      query = utils.createQueryFilter(color);
+      if (!query.colorTest) {
         return res.status(400).send("Incorrect color");
       }
-      query = {
-        colors
-      };
     }
   }
 
@@ -86,8 +82,19 @@ router.patch("/:id", (req, res) => {
  * Обрабатываем GET запрос к маршруту /api/cards/archive - отдаем список "архивных" заметок
  */
 router.get("/archive", (req, res) => {
+  const requestKeys = Object.keys(req.query);
+  let query = "";
+
+  if (requestKeys.length > 0) {
+    const { color } = req.query;
+
+    if (color) {
+      query = utils.createQueryFilter(color);
+    }
+  }
+
   cards
-    .getCardArchive()
+    .getCardArchive({ query })
     .then(({ data, status }) => {
       return res.status(status).json(data);
     })

@@ -101,9 +101,19 @@ const getCardSize = note => {
   }
 };
 
+const createQueryFilter = color => {
+  const colors = color.split(",");
+  const colorTest = colors.every(color => checkColorCorrect(color));
+  return {
+    colors,
+    colorTest
+  };
+};
+
 module.exports = {
   getCardsData,
   checkColorCorrect,
   getCardSequence,
-  getCardSize
+  getCardSize,
+  createQueryFilter
 };
