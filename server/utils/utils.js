@@ -4,7 +4,7 @@ const json = require('./cards.json');
  * Получаем список заметок и ложим их в глобальную переменную. 
  * Так же, для быстрого доступа к элементам цветов, кладем их в hash, что бы при, минимум, проверке цвета на корректность делать это без постоянного прохода циклом по массиву
  */
-getCardsData = () => {
+const getCardsData = () => {
   global.cardsData = json;
   global.cardSequence = setCardSequence();
   global.cardColorsHash = getColorsHash(global.cardsData.colors);
@@ -13,7 +13,7 @@ getCardsData = () => {
 /**
  * Кладем цвета в хэш
  */
-getColorsHash = (colors) => {
+const getColorsHash = (colors) => {
   let hash = {};
   colors.forEach((item) => {
     const { id } = item;
@@ -24,7 +24,7 @@ getColorsHash = (colors) => {
 /**
  * Получаем начальное значение счетчика id заметок
  */
-setCardSequence = () => {
+const setCardSequence = () => {
   const { notes } = global.cardsData;
   return notes.reduce((max, item) => {
     if (item.id > max) {
@@ -38,21 +38,21 @@ setCardSequence = () => {
  * Возвращаем увеличенный на 1 ID карты (в боевых условиях этот счетчик лежал бы в отдельной коллекции (таблице) БД)
  */
 
-getCardSequence = () => {
+const getCardSequence = () => {
   return ++global.cardSequence;
 }
 
 /**
  * Проверяем, что цвет есть в хэше цветов
  */
-checkColorCorrect = (color) => {
+const checkColorCorrect = (color) => {
   return !!global.cardColorsHash[color];
 }
 
 /**
  * Получаем размер заметки исходя из ее содержимого
  */
-getCardSize = (note) => {
+const getCardSize = (note) => {
   console.log(note);
   const { type, tags, text, attachment, items } = note;
 
