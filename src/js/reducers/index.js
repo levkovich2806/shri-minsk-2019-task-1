@@ -1,7 +1,8 @@
-const initialState = {
-  notes: []
-};
-function rootReducer(state = initialState, action) {
-  return state;
-}
-export default rootReducer;
+import { combineReducers } from 'redux';
+import notes from './notes';
+import filterNotes from './filterNotes';
+
+export default combineReducers({
+  notes,
+  filterNotes
+});
