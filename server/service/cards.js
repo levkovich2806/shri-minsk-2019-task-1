@@ -3,7 +3,7 @@ const utils = require('../utils/utils');
 /**
  * Получаем список заметок. Если в query есть параметр filter, то список будет отфильтрован по нему
  */
-get_cards_list = ({ query }) => {
+const get_cards_list = ({ query }) => {
   let data = getUsedCards();
   if (query && query.filter) {
     data = getFilteredData(query.filter);
@@ -28,7 +28,7 @@ get_cards_list = ({ query }) => {
 /**
  * Возвращаем отфильтрованный список заметок
  */
-getFilteredData = ({ filterName = "", filterValue = "" }) => {
+const getFilteredData = ({ filterName = "", filterValue = "" }) => {
   const cards = getUsedCards();
   const valueType = getFilterValueType(filterName);
   return cards.filter((item) => {
@@ -43,7 +43,7 @@ getFilteredData = ({ filterName = "", filterValue = "" }) => {
 /**
  * Получаем список только "неархивных" заметок
  */
-getUsedCards = () => {
+const getUsedCards = () => {
   const cards = getCards();
   return cards.filter(item => item.status !== 0);
 }
@@ -51,14 +51,14 @@ getUsedCards = () => {
 /**
  * Получаем полный список заметок (вне зависимости от статуса)
  */
-getCards = () => {
+const getCards = () => {
   return global.cardsData.notes;
 }
 
 /**
  * По имени фильтра возвращаем тип его значения
  */
-getFilterValueType = (filterName) => {
+const getFilterValueType = (filterName) => {
   switch (filterName) {
     case "color":
       return "number";
@@ -72,7 +72,7 @@ getFilterValueType = (filterName) => {
 /**
  * Добавляем заметку в массив заметок
  */
-addCard = (card) => {
+const addCard = (card) => {
   if (!card.size) {
     card.size = utils.getCardSize(card);
   }
@@ -82,7 +82,7 @@ addCard = (card) => {
 /**
  * Удаляем заметку из массива заметок
  */
-deleteCard = (id) => {
+const deleteCard = (id) => {
   let isDelete = false;
   global.cardsData.notes = global.cardsData.notes.filter((item) => {
     if (item.id !== id) {
@@ -110,7 +110,7 @@ deleteCard = (id) => {
 /**
  * Обновляем инфомрацию по заметке
  */
-updateCard = (id, card) => {
+const updateCard = (id, card) => {
   let isModify = false;
   global.cardsData.notes = global.cardsData.notes.map((item) => {
     if (item.id === id) {
@@ -139,7 +139,7 @@ updateCard = (id, card) => {
 /**
  * Получаем список "архивных" заметок
  */
-getCardArchive = () => {
+const getCardArchive = () => {
   const cards = getCards();
   const archive = cards.filter(card => card.status === 0);
   return new Promise((resolve, reject) => {
