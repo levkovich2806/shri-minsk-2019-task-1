@@ -61,7 +61,8 @@ class NoteBlock extends Component {
       created,
       modificator,
       content,
-      blockType
+      blockType,
+      isArchive
     } = this.props;
     const colorValue = this.getBgStyle();
 
@@ -84,11 +85,13 @@ class NoteBlock extends Component {
           {blockType !== "top" && (
             <div className={styles.content__footer_bottom}>
               <div>
-                <NoteActions
-                  id={id}
-                  moveToArchive={this.moveToArchive}
-                  editNote={this.editNote}
-                />
+                {!isArchive &&
+                  <NoteActions
+                    id={id}
+                    moveToArchive={this.moveToArchive}
+                    editNote={this.editNote}
+                  />
+                }
               </div>
               {created && (
                 <div className={styles.date}>
@@ -106,6 +109,7 @@ class NoteBlock extends Component {
 export default connect(
   state => ({
     colorsHash: state.notes.colorsHash,
+    isArchive: state.notes.isArchive,
   }),
   dispatch => ({
     onMoveToArchive: (id) => {
