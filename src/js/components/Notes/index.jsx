@@ -2,10 +2,10 @@ import React, { Component } from "react";
 import { getNotesData } from '../../actions/index'
 import Note from "../Note";
 import NotesTitle from "../NotesTitle";
-import Skeleton, { SkeletonTheme } from 'react-loading-skeleton';
 import { connect } from 'react-redux';
 
 import styles from "./index.module.scss";
+import Loader from "../Loader";
 
 class Notes extends Component {
 
@@ -20,9 +20,7 @@ class Notes extends Component {
     if (isLoadingMainData) {
       return (
         <div className={styles.notes}>
-          <SkeletonTheme color="#fff" highlightColor="#444">
-            <Skeleton width={300} height={42} />
-          </SkeletonTheme>
+          <Loader />
         </div>
       );
     }
@@ -32,9 +30,7 @@ class Notes extends Component {
         <NotesTitle />
         {isLoadingNotes
           ?
-          <SkeletonTheme color="#fff" highlightColor="#444">
-            <Skeleton width={300} height={42} />
-          </SkeletonTheme>
+          <Loader />
           :
           <div className={styles.notes__content}>
             {notes.map(data => (
