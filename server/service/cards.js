@@ -45,7 +45,7 @@ getFilteredData = ({ filterName = "", filterValue = "" }) => {
  */
 getUsedCards = () => {
   const cards = getCards();
-  return cards.filter(item => !item.status || item.status !== 0);
+  return cards.filter(item => item.status !== 0);
 }
 
 /**
