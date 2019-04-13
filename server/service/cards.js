@@ -33,7 +33,7 @@ const getFilteredData = ({ filterName = "", filterValue = "" }) => {
   const valueType = getFilterValueType(filterName);
   return cards.filter((item) => {
     if (valueType === "string") {
-      return item[filterName].inclide(filterValue);
+      return item[filterName].include(filterValue);
     } else if (valueType === "number") {
       return item[filterName] === Number(filterValue);
     }
