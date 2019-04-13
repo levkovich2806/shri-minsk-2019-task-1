@@ -198,6 +198,24 @@ const getCardColors = () => {
   });
 };
 
+const getData = () => {
+  return new Promise((resolve, reject) => {
+    setTimeout(() => {
+      const cardsData = global.cardsData;
+      if (cardsData) {
+        resolve({
+          status: 200,
+          data: cardsData
+        });
+      }
+      reject({
+        status: 500,
+        error: "Ошибка получения архива"
+      });
+    }, 1000);
+  });
+};
+
 module.exports = {
   get_cards_list,
   deleteCard,
@@ -205,5 +223,6 @@ module.exports = {
   updateCard,
   getCardArchive,
   getCardTags,
-  getCardColors
+  getCardColors,
+  getData
 };

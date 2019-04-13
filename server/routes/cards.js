@@ -117,3 +117,14 @@ router.get("/colors", (req, res) => {
       return res.status(status).send(error);
     });
 });
+
+router.get("/data", (req, res) => {
+  cards
+    .getData()
+    .then(({ data, status }) => {
+      return res.status(status).json(data);
+    })
+    .catch(({ error, status }) => {
+      return res.status(status).send(error);
+    });
+});
