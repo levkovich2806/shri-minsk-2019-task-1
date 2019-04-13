@@ -25,11 +25,17 @@ export const getNotesData = () => async dispatch => {
 /**
  * Запрашиваем с сервера список заметок (все кроме архивных)
  */
-export const getNotes = () => async dispatch => {
+export const getNotes = (filters) => async dispatch => {
   dispatch({ type: "FETCH_ON_GET_NOTES_START" });
 
+  let url = `${API}/api/cards`;
+  if (filters.length > 0) {
+    let filterList = filters.join(",");
+    url += `?color=${filterList}`;
+  }
+
   const data = await sendRequest({
-    url: `${API}/api/cards`,
+    url,
     params: {
       method: "GET"
     }
@@ -41,11 +47,17 @@ export const getNotes = () => async dispatch => {
 /**
  * Запрашиваем с сервера только "архивированные" карточки
  */
-export const getArchiveNotes = () => async dispatch => {
+export const getArchiveNotes = (filters) => async dispatch => {
   dispatch({ type: "FETCH_ON_GET_ARCHIVE_START" });
 
+  let url = `${API}/api/cards/archive`;
+  if (filters.length > 0) {
+    let filterList = filters.join(",");
+    url += `?color=${filterList}`;
+  }
+
   const data = await sendRequest({
-    url: `${API}/api/cards/archive`,
+    url,
     params: {
       method: "GET"
     }
@@ -54,18 +66,6 @@ export const getArchiveNotes = () => async dispatch => {
   dispatch({ type: "FETCH_ON_GET_ARCHIVE_SUCCESS", payload: data });
   dispatch({ type: "FETCH_ON_GET_ARCHIVE_STOP" });
 };
-
-/**
- * Запрашиваем карточки с определенным цветом
- */
-export function getNotesByColor({ payload: { color = -1 } }) {
-  return sendRequest({
-    url: `${API}/api/cards?color=${color}`,
-    params: {
-      method: "GET"
-    }
-  });
-}
 
 /**
  * Добавляем новую заметку

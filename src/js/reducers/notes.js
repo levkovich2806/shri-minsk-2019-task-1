@@ -7,7 +7,8 @@ import {
   FETCH_ON_GET_NOTES_DATA_STOP,
   FETCH_ON_GET_ARCHIVE_START,
   FETCH_ON_GET_ARCHIVE_SUCCESS,
-  FETCH_ON_GET_ARCHIVE_STOP
+  FETCH_ON_GET_ARCHIVE_STOP,
+  ON_CHANGE_FILTERS
 } from "../constants/action-types";
 
 const initialState = {
@@ -17,8 +18,10 @@ const initialState = {
   colors: [],
   colorsHash: {}, //Хэш цветов для быстрого доступа, не прибегая к постоянному перебору массива при выборе цвета по ID
   tagsHash: {}, //Хэш тэгов для быстрого доступа, не прибегая к постоянному перебору массива при выборе тэга по ID
+  filters: [],
   isLoadingNotes: false,
-  isLoadingMainData: false
+  isLoadingMainData: false,
+  isArchive: false,
 };
 function rootReducer(state = initialState, action) {
   if (action.type === FETCH_ON_GET_NOTES_START) {
@@ -74,6 +77,18 @@ function rootReducer(state = initialState, action) {
     return {
       ...state,
       isLoadingMainData: false
+    };
+  } else if (action.type === ON_CHANGE_FILTERS) {
+    const { id } = action.payload;
+    let filters = [...[], ...state.filters];
+    if (!filters.includes(id)) {
+      filters.push(id);
+    } else {
+      filters = filters.filter(item => item !== id);
+    }
+    return {
+      ...state,
+      filters
     };
   }
   return state;
