@@ -1,14 +1,13 @@
 import {
   FETCH_ON_GET_NOTES_SUCCESS,
   FETCH_ON_GET_NOTES_START,
-  FETCH_ON_GET_NOTES_STOP,
   FETCH_ON_GET_NOTES_DATA_SUCCESS,
   FETCH_ON_GET_NOTES_DATA_START,
   FETCH_ON_GET_NOTES_DATA_STOP,
   FETCH_ON_GET_ARCHIVE_START,
   FETCH_ON_GET_ARCHIVE_SUCCESS,
-  FETCH_ON_GET_ARCHIVE_STOP,
-  ON_CHANGE_FILTERS
+  ON_CHANGE_FILTERS,
+  FETCH_ON_GET_NOTES_STOP
 } from "../constants/action-types";
 
 const initialState = {
@@ -50,11 +49,6 @@ function rootReducer(state = initialState, action) {
     return {
       ...state,
       notes: action.payload,
-    };
-  } else if (action.type === FETCH_ON_GET_ARCHIVE_STOP) {
-    return {
-      ...state,
-      isLoadingNotes: false
     };
   } else if (action.type === FETCH_ON_GET_NOTES_DATA_START) {
     return {

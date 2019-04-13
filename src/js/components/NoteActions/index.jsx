@@ -3,7 +3,10 @@ import classnames from "classnames";
 import styles from "./index.module.scss";
 
 class NoteActions extends Component {
+
   render() {
+    const { id, moveToArchive, editNote } = this.props;
+
     return (
       <div className={styles.actions}>
         <svg
@@ -11,6 +14,7 @@ class NoteActions extends Component {
           focusable="false"
           data-prefix="fas"
           data-icon="check"
+          onClick={() => moveToArchive(id)}
           className={classnames(
             "svg-inline--fa",
             "fa-check",
@@ -33,6 +37,7 @@ class NoteActions extends Component {
           focusable="false"
           data-prefix="fas"
           data-icon="pen"
+          onClick={() => editNote(id)}
           className={classnames(
             "svg-inline--fa",
             "fa-pen",

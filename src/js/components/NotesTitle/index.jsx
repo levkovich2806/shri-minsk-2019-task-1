@@ -6,15 +6,10 @@ import styles from "./index.module.scss";
 
 class NotesTitle extends PureComponent {
 
-  changeFilterStatus = async (id) => {
-    const { onChangeFilter } = this.props;
-    await onChangeFilter(id);
-    await this.getFilteredData();
-  }
-
-  getFilteredData = () => {
-    const { filters, onGetFilteredData, isArchive } = this.props;
-    onGetFilteredData(filters, isArchive);
+  changeFilterStatus = (id) => {
+    const { onChangeFilter, onGetFilteredData } = this.props;
+    onChangeFilter(id);
+    onGetFilteredData();
   }
 
   render() {
@@ -52,12 +47,8 @@ export default connect(
         }
       })
     },
-    onGetFilteredData: (filters, isArchive) => {
-      if (isArchive) {
-        dispatch(getArchiveNotes(filters));
-      } else {
-        dispatch(getNotes(filters));
-      }
+    onGetFilteredData: () => {
+      dispatch(getNotes());
     }
   })
 )(NotesTitle);

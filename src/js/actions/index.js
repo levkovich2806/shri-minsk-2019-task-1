@@ -23,12 +23,21 @@ export const getNotesData = () => async dispatch => {
 };
 
 /**
- * Запрашиваем с сервера список заметок (все кроме архивных)
+ * Запрашиваем с сервера список заметок
  */
-export const getNotes = (filters) => async dispatch => {
-  dispatch({ type: "FETCH_ON_GET_NOTES_START" });
+export const getNotes = ({ changeStatus = false } = {}) => async (dispatch, getState) => {
+  const { filters, isArchive } = getState().notes;
 
+  let status = changeStatus ? !isArchive : isArchive;
   let url = `${API}/api/cards`;
+
+  if (status) {
+    dispatch({ type: "FETCH_ON_GET_ARCHIVE_START" });
+    url += `/archive`;
+  } else {
+    dispatch({ type: "FETCH_ON_GET_NOTES_START" });
+  }
+
   if (filters && filters.length > 0) {
     let filterList = filters.join(",");
     url += `?color=${filterList}`;
@@ -42,29 +51,6 @@ export const getNotes = (filters) => async dispatch => {
   });
   dispatch({ type: "FETCH_ON_GET_NOTES_SUCCESS", payload: data });
   dispatch({ type: "FETCH_ON_GET_NOTES_STOP" });
-};
-
-/**
- * Запрашиваем с сервера только "архивированные" карточки
- */
-export const getArchiveNotes = (filters) => async dispatch => {
-  dispatch({ type: "FETCH_ON_GET_ARCHIVE_START" });
-
-  let url = `${API}/api/cards/archive`;
-  if (filters && filters.length > 0) {
-    let filterList = filters.join(",");
-    url += `?color=${filterList}`;
-  }
-
-  const data = await sendRequest({
-    url,
-    params: {
-      method: "GET"
-    }
-  });
-
-  dispatch({ type: "FETCH_ON_GET_ARCHIVE_SUCCESS", payload: data });
-  dispatch({ type: "FETCH_ON_GET_ARCHIVE_STOP" });
 };
 
 /**
@@ -114,8 +100,7 @@ export function updateNote({ payload: { note = {}, id = 0 } }) {
 /**
  * Изменяем статус заметки - если inArchive - "отправлеям" в архив, иначе "восстанавливаем" из архива
  */
-export function changeNoteStatus({ payload: { id = 0, inArchive = true } }) {
-  console.log(id, inArchive);
+export const changeNoteStatus = ({ payload: { id = 0, inArchive = true } } = {}) => async (dispatch, getState) => {
   const { archive, inUse } = NOTE_STATUS;
 
   let status = archive;
@@ -123,7 +108,9 @@ export function changeNoteStatus({ payload: { id = 0, inArchive = true } }) {
     status = inUse;
   }
 
-  return sendRequest({
+  dispatch({ type: "FETCH_ON_MOVE_ARCHIVE_START" });
+
+  await sendRequest({
     url: `${API}/api/cards/${id}`,
     params: {
       method: "PATCH",
@@ -134,4 +121,6 @@ export function changeNoteStatus({ payload: { id = 0, inArchive = true } }) {
       }
     }
   });
+  dispatch({ type: "FETCH_ON_MOVE_ARCHIVE_STOP" });
+  dispatch(getNotes());
 }

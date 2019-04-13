@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import classnames from "classnames";
 import { connect } from "react-redux";
-import { getArchiveNotes, getNotes } from "../../actions";
+import { getNotes } from "../../actions";
 import Logo from "../Logo";
 import Search from "../Search";
 import Action from "../Action";
@@ -78,10 +78,10 @@ export default connect(
   }),
   dispatch => ({
     onGetActiveNotes: () => {
-      dispatch(getNotes());
+      dispatch(getNotes({ changeStatus: true }));
     },
     onGetArchiveNotes: () => {
-      dispatch(getArchiveNotes());
+      dispatch(getNotes({ changeStatus: true }));
     }
   })
 )(Header);

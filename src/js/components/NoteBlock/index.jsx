@@ -1,12 +1,23 @@
 import React, { Component } from "react";
 import NoteTags from "../NoteTags";
 import classnames from "classnames";
+import { changeNoteStatus, getNotes } from '../../actions';
 import styles from "./index.module.scss";
 import NoteActions from "../NoteActions";
 import moment from "moment";
 import { connect } from 'react-redux';
 
 class NoteBlock extends Component {
+
+  moveToArchive = (id) => {
+    const { onMoveToArchive } = this.props;
+    onMoveToArchive(id);
+  }
+
+  editNote = () => {
+    console.log("editNote");
+  }
+
   getBgStyle = () => {
     const { color, colorsHash = { 0: "#ffffff" } } = this.props;
     return colorsHash[color] ? colorsHash[color].color : "#ffffff";
@@ -42,11 +53,11 @@ class NoteBlock extends Component {
 
   render() {
     const {
+      id,
       title,
       text,
       tags,
       reminder,
-      type,
       created,
       modificator,
       content,
@@ -73,7 +84,11 @@ class NoteBlock extends Component {
           {blockType !== "top" && (
             <div className={styles.content__footer_bottom}>
               <div>
-                <NoteActions />
+                <NoteActions
+                  id={id}
+                  moveToArchive={this.moveToArchive}
+                  editNote={this.editNote}
+                />
               </div>
               {created && (
                 <div className={styles.date}>
@@ -91,5 +106,15 @@ class NoteBlock extends Component {
 export default connect(
   state => ({
     colorsHash: state.notes.colorsHash,
+  }),
+  dispatch => ({
+    onMoveToArchive: (id) => {
+      dispatch(changeNoteStatus({
+        payload: {
+          id,
+          inArchive: true,
+        }
+      }));
+    },
   })
 )(NoteBlock);
