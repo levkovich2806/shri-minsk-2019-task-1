@@ -84,6 +84,9 @@ const addCard = card => {
   if (!card.size) {
     card.size = utils.getCardSize(card);
   }
+  card.id = utils.getCardSequence();
+  card.created = Date.now();
+
   return global.cardsData.notes.push(card);
 };
 
