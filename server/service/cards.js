@@ -28,6 +28,35 @@ const get_cards_list = ({ query }) => {
   });
 };
 
+const getData = ({ query }) => {
+  let colors;
+  if (query && query.colors) {
+    colors = query.colors;
+  }
+
+  let data = getFilteredData({
+    colors,
+    isArchive: false
+  });
+
+  return new Promise((resolve, reject) => {
+    let cardsData = {};
+    cardsData.colors = global.cardsData.colors;
+    cardsData.tags = global.cardsData.tags;
+    cardsData.notes = data;
+    if (cardsData) {
+      resolve({
+        status: 200,
+        data: cardsData
+      });
+    }
+    reject({
+      status: 500,
+      error: "Ошибка получения архива"
+    });
+  });
+};
+
 /**
  * Получаем список "архивных" заметок
  */
@@ -167,25 +196,6 @@ const getCardColors = () => {
       resolve({
         status: 200,
         data: colors
-      });
-    }
-    reject({
-      status: 500,
-      error: "Ошибка получения архива"
-    });
-  });
-};
-
-const getData = () => {
-  return new Promise((resolve, reject) => {
-    let cardsData = {};
-    cardsData.colors = global.cardsData.colors;
-    cardsData.tags = global.cardsData.tags;
-    cardsData.notes = getFilteredData();
-    if (cardsData) {
-      resolve({
-        status: 200,
-        data: cardsData
       });
     }
     reject({

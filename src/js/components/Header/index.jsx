@@ -55,13 +55,12 @@ class Header extends Component {
           <span className={styles["main-nav"]}>
             <Action
               title="Активные"
-              // {isArchive && status="active" }
-              status={!isArchive && "active"}
+              status={!isArchive ? "active" : ""}
               onClick={onGetActiveNotes}
             />
             <Action
               title="Архив"
-              status={isArchive && "active"}
+              status={isArchive ? "active" : ""}
               onClick={onGetArchiveNotes}
             />
             <Action title="Добавить" status="btn" onClick={showModal} />

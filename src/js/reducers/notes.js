@@ -10,6 +10,8 @@ import {
   FETCH_ON_GET_NOTES_STOP
 } from "../constants/action-types";
 
+const sessionFilters = localStorage.getItem("filters");
+
 const initialState = {
   notes: [],
   archive: [],
@@ -17,7 +19,7 @@ const initialState = {
   colors: [],
   colorsHash: {}, //Хэш цветов для быстрого доступа, не прибегая к постоянному перебору массива при выборе цвета по ID
   tagsHash: {}, //Хэш тэгов для быстрого доступа, не прибегая к постоянному перебору массива при выборе тэга по ID
-  filters: [],
+  filters: sessionFilters ? JSON.parse(sessionFilters) : [],
   isLoadingNotes: false,
   isLoadingMainData: false,
   isArchive: false
@@ -86,6 +88,9 @@ function rootReducer(state = initialState, action) {
     } else {
       filters = filters.filter(item => item !== id);
     }
+
+    localStorage.setItem("filters", JSON.stringify(filters));
+
     return {
       ...state,
       filters

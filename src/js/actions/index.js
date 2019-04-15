@@ -9,11 +9,20 @@ const NOTE_STATUS = {
 /**
  * Запрашиваем с сервера список заметок, тэгов, цветов (заметки - все кроме архивных)
  */
-export const getNotesData = () => async dispatch => {
+export const getNotesData = () => async (dispatch, getState) => {
   dispatch({ type: "FETCH_ON_GET_NOTES_DATA_START" });
 
+  const { filters } = getState().notes;
+
+  let url = `${API}/api/cards/data`;
+
+  if (filters && filters.length > 0) {
+    let filterList = filters.join(",");
+    url += `?color=${filterList}`;
+  }
+
   const data = await sendRequest({
-    url: `${API}/api/cards/data`,
+    url,
     params: {
       method: "GET"
     }

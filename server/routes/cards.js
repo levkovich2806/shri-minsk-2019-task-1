@@ -126,8 +126,19 @@ router.get("/colors", (req, res) => {
 });
 
 router.get("/data", (req, res) => {
+  const requestKeys = Object.keys(req.query);
+  let query = "";
+
+  if (requestKeys.length > 0) {
+    const { color } = req.query;
+
+    if (color) {
+      query = utils.createQueryFilter(color);
+    }
+  }
+
   cards
-    .getData()
+    .getData({ query })
     .then(({ data, status }) => {
       return res.status(status).json(data);
     })
