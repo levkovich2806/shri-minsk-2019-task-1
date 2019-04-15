@@ -20,7 +20,7 @@ class Modal extends Component {
     size: "",
     items: [],
     title: "",
-    image: "",
+    url: "",
     color: "",
     tags: [],
     description: "",
@@ -81,7 +81,7 @@ class Modal extends Component {
 
   onImageChange = e => {
     this.setState({
-      image: e.target.value
+      url: e.target.value
     });
   };
 
@@ -190,10 +190,12 @@ class Modal extends Component {
     } else {
       delete data.items;
     }
+    this.props.hideModal();
     this.props.addNote(data);
   };
 
   updateNote = () => {
+    this.props.hideModal();
     this.props.updateNote(this.state);
   };
 

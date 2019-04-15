@@ -40,8 +40,6 @@ class App extends Component {
         {modalVisible && (
           <Modal
             hideModal={this.hideModal}
-            addNote={this.addNote}
-            editNote={this.editNote}
           />
         )}
       </div>

@@ -61,7 +61,8 @@ export const getNotes = ({ changeStatus = false } = {}) => async (
       method: "GET"
     }
   });
-  dispatch({ type: "FETCH_ON_GET_NOTES_SUCCESS", payload: data });
+
+  dispatch({ type: "FETCH_ON_GET_NOTES_SUCCESS", payload: data ? data : [] });
   dispatch({ type: "FETCH_ON_GET_NOTES_STOP" });
 };
 
@@ -69,9 +70,8 @@ export const getNotes = ({ changeStatus = false } = {}) => async (
  * Добавляем новую заметку
  */
 
-export const addNote = ({ payload: { note = {} } }) => dispatch => {
-  console.log(note);
-  return sendRequest({
+export const addNote = ({ payload: { note = {} } }) => async dispatch => {
+  await sendRequest({
     url: `${API}/api/cards`,
     params: {
       method: "POST",
@@ -80,26 +80,27 @@ export const addNote = ({ payload: { note = {} } }) => dispatch => {
       }
     }
   });
+  dispatch(getNotes());
 };
 
 /**
  * Удаляем заметку
  */
-export const deleteNote = ({ payload: { id = 0 } }) => dispatch => {
-  return sendRequest({
+export const deleteNote = ({ payload: { id = 0 } }) => async dispatch => {
+  await sendRequest({
     url: `${API}/api/cards/${id}`,
     params: {
       method: "DELETE"
     }
   });
+  dispatch(getNotes());
 };
 
 /**
  * Обновляем заметку
  */
-export const updateNote = ({ payload: { note = {}, id = 0 } }) => dispatch => {
-  console.log(note, id);
-  return sendRequest({
+export const updateNote = ({ payload: { note = {}, id = 0 } }) => async dispatch => {
+  await sendRequest({
     url: `${API}/api/cards/${id}`,
     params: {
       method: "PATCH",
@@ -108,6 +109,7 @@ export const updateNote = ({ payload: { note = {}, id = 0 } }) => dispatch => {
       }
     }
   });
+  dispatch(getNotes());
 };
 
 /**
@@ -115,7 +117,7 @@ export const updateNote = ({ payload: { note = {}, id = 0 } }) => dispatch => {
  */
 export const changeNoteStatus = ({
   payload: { id = 0, inArchive = true }
-} = {}) => async (dispatch, getState) => {
+} = {}) => async dispatch => {
   const { archive, inUse } = NOTE_STATUS;
 
   let status = archive;
