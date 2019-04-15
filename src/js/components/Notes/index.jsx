@@ -17,7 +17,7 @@ class Notes extends Component {
       data: { notes },
       isLoadingNotes
     } = this.props;
-    console.log(notes);
+
     return (
       <div className={styles.notes}>
         <NotesTitle />
