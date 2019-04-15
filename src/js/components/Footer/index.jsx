@@ -3,10 +3,11 @@ import styles from "./index.module.scss";
 
 class Footer extends PureComponent {
   render() {
+    const { author, copyright } = this.props;
     return (
       <div className={styles.footer}>
-        <div className={styles.footer__author}>Сергей Левкович</div>
-        <div className={styles.footer__copyright}>&copy; Яндекс ШРИ</div>
+        <div className={styles.footer__author}>{author}</div>
+        <div className={styles.footer__copyright}>&copy; {copyright}</div>
       </div>
     );
   }

@@ -1,54 +1,25 @@
 import React, { Component } from "react";
 import NoteTags from "../NoteTags";
 import classnames from "classnames";
-import { changeNoteStatus, getNotes } from '../../actions';
+import { changeNoteStatus, getNotes } from "../../actions";
 import styles from "./index.module.scss";
 import NoteActions from "../NoteActions";
-import moment from "moment";
-import { connect } from 'react-redux';
+import { connect } from "react-redux";
+import { getReadableDate } from "../../utils/utils";
 
 class NoteBlock extends Component {
-
-  moveToArchive = (id) => {
+  moveToArchive = id => {
     const { onMoveToArchive } = this.props;
     onMoveToArchive(id);
-  }
+  };
 
   editNote = () => {
     console.log("editNote");
-  }
+  };
 
   getBgStyle = () => {
     const { color, colorsHash = { 0: "#ffffff" } } = this.props;
     return colorsHash[color] ? colorsHash[color].color : "#ffffff";
-  };
-
-  getReadableDate = date => {
-    date /= 1000;
-    const now = moment().unix();
-    const normalDate = moment.unix(date);
-    const time = moment.unix(date).format("HH:mm");
-
-    const years = moment().diff(normalDate, "years");
-    const month = moment().diff(normalDate, "month");
-    const days = moment().diff(normalDate, "days");
-
-    if (years > 0) {
-      return `${years} год(а) назад`;
-    } else if (month > 0) {
-      return `${month} месяц(ев) назад`;
-    } else if (days > 0) {
-      if (now > date) {
-        if (days === 1) {
-          return `${time}, вчера`;
-        }
-        return `${days} дня(ей) назад`;
-      } else {
-        return `через ${days} дня(ей)`;
-      }
-    } else {
-      return `${time}, сегодня`;
-    }
   };
 
   render() {
@@ -85,18 +56,16 @@ class NoteBlock extends Component {
           {blockType !== "top" && (
             <div className={styles.content__footer_bottom}>
               <div>
-                {!isArchive &&
+                {!isArchive && (
                   <NoteActions
                     id={id}
                     moveToArchive={this.moveToArchive}
                     editNote={this.editNote}
                   />
-                }
+                )}
               </div>
               {created && (
-                <div className={styles.date}>
-                  {this.getReadableDate(created)}
-                </div>
+                <div className={styles.date}>{getReadableDate(created)}</div>
               )}
             </div>
           )}
@@ -109,16 +78,18 @@ class NoteBlock extends Component {
 export default connect(
   state => ({
     colorsHash: state.notes.colorsHash,
-    isArchive: state.notes.isArchive,
+    isArchive: state.notes.isArchive
   }),
   dispatch => ({
-    onMoveToArchive: (id) => {
-      dispatch(changeNoteStatus({
-        payload: {
-          id,
-          inArchive: true,
-        }
-      }));
-    },
+    onMoveToArchive: id => {
+      dispatch(
+        changeNoteStatus({
+          payload: {
+            id,
+            inArchive: true
+          }
+        })
+      );
+    }
   })
 )(NoteBlock);

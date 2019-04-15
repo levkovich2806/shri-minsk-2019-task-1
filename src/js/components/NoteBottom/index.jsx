@@ -24,19 +24,6 @@ class NoteBottom extends Component {
 
   render() {
     const { attachments } = this.props;
-    // let isBottom = false;
-    // let links = "";
-    // let images = "";
-    // if (attachments[0] && attachments[0].type === "link") {
-    //   links = this.getBottomLinks(attachments);
-    //   isBottom = true;
-    // }
-    // if (attachments[0] && attachments[0].type === "image") {
-    //   images = this.getBottomImages(attachments);
-    //   isBottom = true;
-    // }
-
-    //if (isBottom) {
     return (
       <div className={styles.bottom}>
         {attachments[0] && attachments[0].type === "link" && (
@@ -55,12 +42,6 @@ class NoteBottom extends Component {
         )}
       </div>
     );
-    //} else {
-    // return (
-    //   <>
-    //   </>
-    // )
-    //}
   }
 }
 

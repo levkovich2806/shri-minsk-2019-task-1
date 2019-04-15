@@ -25,7 +25,10 @@ export const getNotesData = () => async dispatch => {
 /**
  * Запрашиваем с сервера список заметок
  */
-export const getNotes = ({ changeStatus = false } = {}) => async (dispatch, getState) => {
+export const getNotes = ({ changeStatus = false } = {}) => async (
+  dispatch,
+  getState
+) => {
   const { filters, isArchive } = getState().notes;
 
   let status = changeStatus ? !isArchive : isArchive;
@@ -57,34 +60,35 @@ export const getNotes = ({ changeStatus = false } = {}) => async (dispatch, getS
  * Добавляем новую заметку
  */
 
-export function addNote({ payload: { card = {} } }) {
+export const addNote = ({ payload: { note = {} } }) => dispatch => {
+  console.log(note);
   return sendRequest({
     url: `${API}/api/cards`,
     params: {
       method: "POST",
       body: {
-        card
+        card: note
       }
     }
   });
-}
+};
 
 /**
  * Удаляем заметку
  */
-export function deleteNote({ payload: { id = 0 } }) {
+export const deleteNote = ({ payload: { id = 0 } }) => dispatch => {
   return sendRequest({
     url: `${API}/api/cards/${id}`,
     params: {
       method: "DELETE"
     }
   });
-}
+};
 
 /**
  * Обновляем заметку
  */
-export function updateNote({ payload: { note = {}, id = 0 } }) {
+export const updateNote = ({ payload: { note = {}, id = 0 } }) => dispatch => {
   console.log(note, id);
   return sendRequest({
     url: `${API}/api/cards/${id}`,
@@ -95,12 +99,14 @@ export function updateNote({ payload: { note = {}, id = 0 } }) {
       }
     }
   });
-}
+};
 
 /**
  * Изменяем статус заметки - если inArchive - "отправлеям" в архив, иначе "восстанавливаем" из архива
  */
-export const changeNoteStatus = ({ payload: { id = 0, inArchive = true } } = {}) => async (dispatch, getState) => {
+export const changeNoteStatus = ({
+  payload: { id = 0, inArchive = true }
+} = {}) => async (dispatch, getState) => {
   const { archive, inUse } = NOTE_STATUS;
 
   let status = archive;
@@ -123,4 +129,4 @@ export const changeNoteStatus = ({ payload: { id = 0, inArchive = true } } = {})
   });
   dispatch({ type: "FETCH_ON_MOVE_ARCHIVE_STOP" });
   dispatch(getNotes());
-}
+};

@@ -9,7 +9,12 @@ import styles from "./index.module.scss";
 
 class Header extends Component {
   render() {
-    const { onGetActiveNotes, onGetArchiveNotes, isArchive } = this.props;
+    const {
+      onGetActiveNotes,
+      onGetArchiveNotes,
+      isArchive,
+      showModal
+    } = this.props;
 
     return (
       <nav className={styles.navbar}>
@@ -59,11 +64,7 @@ class Header extends Component {
               status={isArchive && "active"}
               onClick={onGetArchiveNotes}
             />
-            <Action
-              title="Добавить"
-              status="btn"
-              onClick={this.showModal}
-            />
+            <Action title="Добавить" status="btn" onClick={showModal} />
           </span>
         </div>
       </nav>
@@ -74,7 +75,7 @@ class Header extends Component {
 export default connect(
   state => ({
     data: state.notes,
-    isArchive: state.notes.isArchive,
+    isArchive: state.notes.isArchive
   }),
   dispatch => ({
     onGetActiveNotes: () => {

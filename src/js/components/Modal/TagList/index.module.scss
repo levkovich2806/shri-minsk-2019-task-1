@@ -1,0 +1,17 @@
+.taglist {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 20px;
+
+  &__title {
+    font-size: 16px;
+    line-height: 22px;
+    font-weight: bold;
+  }
+
+  &__list {
+    &_item {
+      text-overflow: ellipsis;
+    }
+  }
+}

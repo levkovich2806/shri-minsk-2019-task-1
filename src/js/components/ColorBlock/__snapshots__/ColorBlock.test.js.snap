@@ -1,0 +1,21 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`ColorBlock ColorBlock rendering 1`] = `
+<label
+  className="container"
+>
+  <input
+    defaultChecked={false}
+    onClick={[Function]}
+    type="checkbox"
+  />
+  <span
+    className="checkmark"
+    style={
+      Object {
+        "backgroundColor": "#000",
+      }
+    }
+  />
+</label>
+`;
