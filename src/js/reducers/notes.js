@@ -20,7 +20,7 @@ const initialState = {
   filters: [],
   isLoadingNotes: false,
   isLoadingMainData: false,
-  isArchive: false,
+  isArchive: false
 };
 function rootReducer(state = initialState, action) {
   if (action.type === FETCH_ON_GET_NOTES_START) {
@@ -48,7 +48,7 @@ function rootReducer(state = initialState, action) {
   } else if (action.type === FETCH_ON_GET_ARCHIVE_SUCCESS) {
     return {
       ...state,
-      notes: action.payload,
+      notes: action.payload
     };
   } else if (action.type === FETCH_ON_GET_NOTES_DATA_START) {
     return {
@@ -59,10 +59,14 @@ function rootReducer(state = initialState, action) {
     const { colors, tags } = action.payload;
 
     let colorsHash = {};
-    colors.forEach(color => (colorsHash[color.id] = color));
+    if (colors) {
+      colors.forEach(color => (colorsHash[color.id] = color));
+    }
 
     let tagsHash = {};
-    tags.forEach(tag => (tagsHash[tag.id] = tag));
+    if (tags) {
+      tags.forEach(tag => (tagsHash[tag.id] = tag));
+    }
 
     const data = { ...action.payload, colorsHash, tagsHash };
     return {

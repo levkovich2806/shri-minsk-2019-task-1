@@ -15,18 +15,16 @@ const get_cards_list = ({ query }) => {
   });
 
   return new Promise((resolve, reject) => {
-    setTimeout(() => {
-      if (data) {
-        resolve({
-          status: 200,
-          data: data
-        });
-      }
-      reject({
-        status: 500,
-        error: "Ошибка получения данных"
+    if (data) {
+      resolve({
+        status: 200,
+        data: data
       });
-    }, 1000);
+    }
+    reject({
+      status: 500,
+      error: "Ошибка получения данных"
+    });
   });
 };
 
@@ -45,20 +43,18 @@ const getCardArchive = ({ query }) => {
   });
 
   return new Promise((resolve, reject) => {
-    setTimeout(() => {
-      //Пустой архив тоже хорошо, его так же возвращаем с 200 кодом
-      if (archive) {
-        resolve({
-          status: 200,
-          data: archive
-        });
-      }
-
-      reject({
-        status: 500,
-        error: "Ошибка получения архива"
+    //Пустой архив тоже хорошо, его так же возвращаем с 200 кодом
+    if (archive) {
+      resolve({
+        status: 200,
+        data: archive
       });
-    }, 1000);
+    }
+
+    reject({
+      status: 500,
+      error: "Ошибка получения архива"
+    });
   });
 };
 
@@ -105,18 +101,16 @@ const deleteCard = id => {
     }
   });
   return new Promise((resolve, reject) => {
-    setTimeout(() => {
-      if (isDelete) {
-        resolve({
-          status: 200,
-          data: "Заметка удалена"
-        });
-      }
-      reject({
-        status: 500,
-        error: "Ошибка удаления заметки или такой заметки не существует"
+    if (isDelete) {
+      resolve({
+        status: 200,
+        data: "Заметка удалена"
       });
-    }, 1000);
+    }
+    reject({
+      status: 500,
+      error: "Ошибка удаления заметки или такой заметки не существует"
+    });
   });
 };
 
@@ -134,75 +128,67 @@ const updateCard = (id, card) => {
   });
 
   return new Promise((resolve, reject) => {
-    setTimeout(() => {
-      if (isModify) {
-        resolve({
-          status: 200,
-          data: "Заметка обновлена"
-        });
-      }
-      reject({
-        status: 500,
-        error: "Ошибка обновления заметки или такой заметки не существует"
+    if (isModify) {
+      resolve({
+        status: 200,
+        data: "Заметка обновлена"
       });
-    }, 1000);
+    }
+    reject({
+      status: 500,
+      error: "Ошибка обновления заметки или такой заметки не существует"
+    });
   });
 };
 
 const getCardTags = () => {
   return new Promise((resolve, reject) => {
-    setTimeout(() => {
-      const tags = global.cardsData.tags;
-      if (tags) {
-        resolve({
-          status: 200,
-          data: tags
-        });
-      }
-      reject({
-        status: 500,
-        error: "Ошибка получения архива"
+    const tags = global.cardsData.tags;
+    if (tags) {
+      resolve({
+        status: 200,
+        data: tags
       });
-    }, 1000);
+    }
+    reject({
+      status: 500,
+      error: "Ошибка получения архива"
+    });
   });
 };
 
 const getCardColors = () => {
   return new Promise((resolve, reject) => {
-    setTimeout(() => {
-      const colors = global.cardsData.colors;
-      if (colors) {
-        resolve({
-          status: 200,
-          data: colors
-        });
-      }
-      reject({
-        status: 500,
-        error: "Ошибка получения архива"
+    const colors = global.cardsData.colors;
+    if (colors) {
+      resolve({
+        status: 200,
+        data: colors
       });
-    }, 1000);
+    }
+    reject({
+      status: 500,
+      error: "Ошибка получения архива"
+    });
   });
 };
 
 const getData = () => {
   return new Promise((resolve, reject) => {
-    setTimeout(() => {
-      let cardsData = {};
-      cardsData.colors = global.cardsData.colors;
-      cardsData.tags = global.cardsData.tags;
-      cardsData.notes = getFilteredData();
-      if (cardsData) {
-        resolve({
-          status: 200,
-          data: cardsData
-        });
-      }
-      reject({
-        status: 500,
-        error: "Ошибка получения архива"
+    let cardsData = {};
+    cardsData.colors = global.cardsData.colors;
+    cardsData.tags = global.cardsData.tags;
+    cardsData.notes = getFilteredData();
+    if (cardsData) {
+      resolve({
+        status: 200,
+        data: cardsData
       });
-    }, 1000);
+    }
+    reject({
+      status: 500,
+      error: "Ошибка получения архива"
+    });
   });
 };
 

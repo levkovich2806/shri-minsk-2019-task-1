@@ -15,6 +15,7 @@ class NoteList extends Component {
               </div>
             );
           }
+          return false;
         })}
       </div>
     );
