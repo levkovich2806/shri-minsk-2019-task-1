@@ -53,7 +53,6 @@ const checkColorCorrect = color => {
  * Получаем размер заметки исходя из ее содержимого
  */
 const getCardSize = note => {
-  console.log(note);
   const { type, tags, text, attachment, items } = note;
 
   let mediumCount = 0;

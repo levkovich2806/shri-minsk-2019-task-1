@@ -23,9 +23,11 @@ class Notes extends Component {
         <NotesTitle />
         {!isLoadingNotes && (
           <div className={styles.notes__content}>
-            {notes.map(data => (
-              <Note key={data.created} {...data} />
-            ))}
+            {notes.map(data => {
+              const { created, id } = data;
+              const key = `${created}${id}`;
+              return <Note key={key} {...data} />;
+            })}
           </div>
         )}
       </div>
@@ -36,16 +38,9 @@ class Notes extends Component {
 export default connect(
   state => ({
     data: state.notes,
-    isLoadingMainData: state.notes.isLoadingMainData,
     isLoadingNotes: state.notes.isLoadingNotes
   }),
   dispatch => ({
-    onAddNote: note => {
-      dispatch({
-        type: "ADD_NOTE",
-        payload: note
-      });
-    },
     onGetNotesData: () => {
       dispatch(getNotesData());
     }
