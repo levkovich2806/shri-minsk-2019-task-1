@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import NoteTags from "../NoteTags";
 import classnames from "classnames";
-import { changeNoteStatus, getNotes } from "../../actions";
+import { changeNoteStatus } from "../../actions";
 import styles from "./index.module.scss";
 import NoteActions from "../NoteActions";
 import { connect } from "react-redux";

@@ -33,7 +33,7 @@ class NoteBottom extends Component {
         {attachments[0] && attachments[0].type === "image" && (
           <div className={styles.images}>
             <div className={styles.images__static}>
-              <img src="./images/img24x20.png" />
+              <img src="./images/img24x20.png" alt="Приложение с картинками" />
             </div>
             <div className={styles.images__content}>
               {this.getBottomImages()}

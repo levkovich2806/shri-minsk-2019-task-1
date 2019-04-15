@@ -6,7 +6,7 @@ class NoteImage extends Component {
     const { url } = this.props;
     return (
       <div className={styles.image}>
-        <img src={url} />
+        <img src={url} alt={url} />
       </div>
     );
   }

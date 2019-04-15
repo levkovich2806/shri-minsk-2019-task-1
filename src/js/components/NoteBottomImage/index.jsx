@@ -6,8 +6,12 @@ class NoteBottomImage extends Component {
     const { url } = this.props;
     return (
       <div className={styles.content}>
-        <a href={url} target="_blank">
-          <img src={url} />
+        <a
+          href={url}
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          <img src={url} alt={url} />
         </a>
       </div>
     );

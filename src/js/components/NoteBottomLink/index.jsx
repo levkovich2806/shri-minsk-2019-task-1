@@ -7,8 +7,8 @@ class NoteLink extends Component {
     const { url, last } = this.props;
     return (
       <div className={classnames(styles.link, !last && styles.link__border)}>
-        <img src="./images/link24.png" className={styles.link__image} />
-        <a href={url} target="_blank" className={styles.link__text}>
+        <img src="./images/link24.png" className={styles.link__image} alt={`Ссылка на сайт ${url}`} />
+        <a href={url} target="_blank" className={styles.link__text} rel="noopener noreferrer">
           {url}
         </a>
       </div>

@@ -21,7 +21,7 @@ function NoteReminder(props) {
   return (
     <div className={styles.reminder}>
       <div className={styles.reminder__image}>
-        <img src="./images/reminder20.png" />
+        <img src="./images/reminder20.png" alt="Напоминание" />
       </div>
       <div className={styles.reminder__text}>
         {getReadableData(props.reminder)}

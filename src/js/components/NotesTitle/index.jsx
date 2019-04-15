@@ -1,7 +1,7 @@
 import React, { PureComponent } from "react";
 import ColorBlock from "../ColorBlock";
 import { connect } from 'react-redux';
-import { getNotes, getArchiveNotes } from '../../actions';
+import { getNotes } from '../../actions';
 import styles from "./index.module.scss";
 
 class NotesTitle extends PureComponent {

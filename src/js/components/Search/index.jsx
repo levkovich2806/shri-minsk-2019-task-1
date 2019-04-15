@@ -20,7 +20,7 @@ class Search extends PureComponent {
         <span className={styles.search__clear} onClick={this.onClear}>
           &times;
         </span>
-        <a className={styles.search__submit}>Найти</a>
+        <span className={styles.search__submit}>Найти</span>
       </span>
     );
   }
