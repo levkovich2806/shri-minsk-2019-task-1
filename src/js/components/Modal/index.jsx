@@ -168,9 +168,28 @@ class Modal extends Component {
     });
   };
 
+  createListItemsObject = () => {
+    const { items } = this.state;
+    return items.map(text => {
+      return {
+        checked: false,
+        text
+      };
+    });
+  }
+
   addNote = () => {
     let data = { ...{}, ...this.state };
-    data.attachments = this.createAttachmentObject();
+    if (data.attachments && data.attachments.length > 0) {
+      data.attachments = this.createAttachmentObject();
+    } else {
+      delete data.attachments;
+    }
+    if (data.type === "list" && data.items.length > 0) {
+      data.items = this.createListItemsObject();
+    } else {
+      delete data.items;
+    }
     this.props.addNote(data);
   };
 
@@ -227,10 +246,10 @@ class Modal extends Component {
                 Добавить
               </span>
             ) : (
-              <span onClick={this.updateNote} className={styles.btn}>
-                Сохранить
+                <span onClick={this.updateNote} className={styles.btn}>
+                  Сохранить
               </span>
-            )}
+              )}
             <span
               onClick={hideModal}
               className={classnames(styles.btn, styles.btn__close)}
