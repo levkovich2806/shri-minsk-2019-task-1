@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import NoteTags from "../NoteTags";
 import classnames from "classnames";
-import { changeNoteStatus } from "../../actions";
+import { changeNoteStatus, deleteNote } from "../../actions";
 import styles from "./index.module.scss";
 import NoteActions from "../NoteActions";
 import { connect } from "react-redux";
@@ -21,6 +21,11 @@ class NoteBlock extends Component {
     const { onEditNote } = this.props;
     onEditNote(id);
   };
+
+  deleteNote = id => {
+    const { onDeleteNote } = this.props;
+    onDeleteNote(id);
+  }
 
   getBgStyle = () => {
     const { color, colorsHash = { 0: "#ffffff" } } = this.props;
@@ -61,13 +66,20 @@ class NoteBlock extends Component {
           {blockType !== "top" && (
             <div className={styles.content__footer_bottom}>
               <div>
-                {!isArchive && (
+                {!isArchive ?
+                  (
+                    <NoteActions
+                      id={id}
+                      moveToArchive={this.moveToArchive}
+                      editNote={this.editNote}
+                    />
+                  )
+                  :
                   <NoteActions
                     id={id}
-                    moveToArchive={this.moveToArchive}
-                    editNote={this.editNote}
+                    deleteNote={this.deleteNote}
                   />
-                )}
+                }
               </div>
               {created && (
                 <div className={styles.date}>{getReadableDate(created)}</div>
@@ -106,6 +118,15 @@ export default connect(
       dispatch({
         type: ON_SHOW_MODAL
       });
+    },
+    onDeleteNote: id => {
+      dispatch(
+        deleteNote({
+          payload: {
+            id,
+          }
+        })
+      );
     }
   })
 )(NoteBlock);

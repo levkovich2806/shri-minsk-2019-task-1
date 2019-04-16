@@ -1,18 +1,21 @@
 .fa-pen,
-.fa-check {
+.fa-check,
+.fa-trash {
   color: rgba(0, 0, 0, 0.2);
   cursor: pointer;
   margin-right: 17px;
 }
 
 .fa-pen:hover,
-.fa-check:hover {
+.fa-check:hover,
+.fa-trash:hover {
   opacity: 1;
   color: rgba(0, 0, 0, 1);
 }
 
 .fa-pen:active,
-.fa-check:active {
+.fa-check:active,
+.fa-trash:active {
   color: rgba(0, 0, 0, 0.5);
 }
 
