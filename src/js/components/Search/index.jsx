@@ -10,11 +10,12 @@ class Search extends PureComponent {
 
   onClear = () => {
     this.searchInput.current.value = "";
+    this.onSearchChange();
   };
 
-  onSearchChange = e => {
-    const searchText = e.target.value;
+  onSearchChange = () => {
     const { onSearchTextChange } = this.props;
+    const searchText = this.searchInput.current.value;
     onSearchTextChange(searchText);
   }
 
@@ -26,12 +27,12 @@ class Search extends PureComponent {
           className={styles.search__text}
           placeholder="Поиск"
           ref={this.searchInput}
-          onChange={this.onSearchChange}
+        //onChange={this.onSearchChange}
         />
         <span className={styles.search__clear} onClick={this.onClear}>
           &times;
         </span>
-        <span className={styles.search__submit}>Найти</span>
+        <span className={styles.search__submit} onClick={this.onSearchChange}>Найти</span>
       </span>
     );
   }
