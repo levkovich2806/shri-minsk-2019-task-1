@@ -40,6 +40,11 @@ export default connect(
     searchText: state.search.searchText,
     notes: state.notes.notes.filter(note => {
       let { searchText } = state.search;
+
+      if (searchText.length === 0) {
+        return note;
+      }
+
       searchText = searchText.toLowerCase();
 
       if (note.title) {
