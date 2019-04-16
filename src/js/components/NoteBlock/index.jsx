@@ -9,7 +9,7 @@ import {
   SET_EDIT_NOTE_STATE,
   ON_SHOW_MODAL
 } from "../../constants/action-types";
-import { getReadableDate } from "../../utils/utils";
+import { getReadableDate, getBackgroundColor } from "../../utils/utils";
 
 class NoteBlock extends Component {
   moveToArchive = id => {
@@ -55,7 +55,7 @@ class NoteBlock extends Component {
           modificator && modificator.map(item => styles[item])
         )}
         style={{
-          backgroundColor: colorValue
+          backgroundColor: getBackgroundColor(colorValue)
         }}
       >
         {title && <div className={styles.content__header}>{title}</div>}

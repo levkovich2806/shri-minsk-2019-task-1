@@ -27,3 +27,18 @@ export const getReadableDate = date => {
     return `${time}, сегодня`;
   }
 };
+
+export const getBackgroundColor = color => {
+  const opacity = 0.4;
+  color = color.replace('#', '');
+
+  let r = parseInt(color.substring(0, 2), 16);
+  let g = parseInt(color.substring(2, 4), 16);
+  let b = parseInt(color.substring(4, 6), 16);
+
+  r = Math.round(r * opacity + 255 * (1 - opacity));
+  g = Math.round(g * opacity + 255 * (1 - opacity));
+  b = Math.round(b * opacity + 255 * (1 - opacity));
+
+  return `rgb(${r},${g},${b})`;
+}
