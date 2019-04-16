@@ -39,7 +39,6 @@ class Modal extends Component {
   }
 
   setEditNoteData = data => {
-    console.log(data);
     const { type, items, title, url, color, tags, text, attachments } = data;
     const editable = {
       type,
@@ -206,7 +205,7 @@ class Modal extends Component {
 
   createAttachmentObject = () => {
     const { attachments, attachmentType } = this.state;
-    console.log(attachments, attachmentType);
+
     return attachments.map(url => {
       return {
         type: attachmentType,
@@ -245,8 +244,6 @@ class Modal extends Component {
 
     delete data.attachmentType;
 
-    console.log(data);
-
     this.props.hideModal();
     if (editableNoteId !== -1) {
       this.props.onUpdateNote(data);
@@ -261,7 +258,6 @@ class Modal extends Component {
   };
 
   render() {
-    console.log(this.props, this.state);
     const { editableNoteId, hideModal, tags, colors } = this.props;
     const {
       type,
