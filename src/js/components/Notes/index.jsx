@@ -14,7 +14,7 @@ class Notes extends Component {
 
   render() {
     const {
-      data: { notes },
+      notes,
       isLoadingNotes
     } = this.props;
 
@@ -37,7 +37,18 @@ class Notes extends Component {
 
 export default connect(
   state => ({
-    data: state.notes,
+    searchText: state.search.searchText,
+    notes: state.notes.notes.filter(note => {
+      const { searchText } = state.search;
+
+      if (note.title && note.title.includes(searchText)) {
+        return note;
+      }
+      if (note.text && note.text.includes(searchText)) {
+        return note;
+      }
+      return false;
+    }),
     isLoadingNotes: state.notes.isLoadingNotes
   }),
   dispatch => ({

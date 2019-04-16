@@ -12,3 +12,5 @@ export const SET_EDIT_NOTE_STATE = "SET_EDIT_NOTE_STATE";
 export const SET_ADD_NOTE_STATE = "SET_ADD_NOTE_STATE";
 export const ON_SHOW_MODAL = "ON_SHOW_MODAL";
 export const ON_HIDE_MODAL = "ON_HIDE_MODAL";
+
+export const ON_SEARCH_NOTE = "ON_SEARCH_NOTE";
