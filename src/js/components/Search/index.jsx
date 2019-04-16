@@ -8,6 +8,12 @@ import styles from "./index.module.scss";
 class Search extends PureComponent {
   searchInput = React.createRef();
 
+  handleInputKeyDown = e => {
+    if (e.key === 'Enter') {
+      this.onSearchChange();
+    }
+  }
+
   onClear = () => {
     this.searchInput.current.value = "";
     this.onSearchChange();
@@ -27,7 +33,7 @@ class Search extends PureComponent {
           className={styles.search__text}
           placeholder="Поиск"
           ref={this.searchInput}
-        //onChange={this.onSearchChange}
+          onKeyDown={this.handleInputKeyDown}
         />
         <span className={styles.search__clear} onClick={this.onClear}>
           &times;
