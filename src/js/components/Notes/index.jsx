@@ -39,14 +39,25 @@ export default connect(
   state => ({
     searchText: state.search.searchText,
     notes: state.notes.notes.filter(note => {
-      const { searchText } = state.search;
+      let { searchText } = state.search;
+      searchText = searchText.toLowerCase();
 
-      if (note.title && note.title.includes(searchText)) {
-        return note;
+      if (note.title) {
+        let { title } = note;
+        title = title.toLowerCase();
+        if (title.includes(searchText)) {
+          return note;
+        }
       }
-      if (note.text && note.text.includes(searchText)) {
-        return note;
+
+      if (note.text) {
+        let { text } = note;
+        text = text.toLowerCase();
+        if (text.includes(searchText)) {
+          return note;
+        }
       }
+
       return false;
     }),
     isLoadingNotes: state.notes.isLoadingNotes
