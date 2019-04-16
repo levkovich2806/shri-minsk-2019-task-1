@@ -1,18 +1,17 @@
 import React from "react";
+import { DELETE_CONFIRM, TO_ARCHIVE_CONFIRM } from '../../constants/main';
 import { isFunction } from 'lodash';
 import classnames from "classnames";
 import styles from "./index.module.scss";
 
-function deleteConfirm(id, cb) {
-  const result = window.confirm("Удалить заметку навсегда?");
+function actionConfirm(message, id, cb) {
+  const result = window.confirm(message);
   if (result) {
     cb(id);
   }
 }
 
 function NoteActions(props) {
-
-
   const { id, moveToArchive, editNote, deleteNote } = props;
 
   return (
@@ -23,7 +22,7 @@ function NoteActions(props) {
           focusable="false"
           data-prefix="fas"
           data-icon="check"
-          onClick={() => moveToArchive(id)}
+          onClick={() => actionConfirm(TO_ARCHIVE_CONFIRM, id, moveToArchive)}
           className={classnames(
             "svg-inline--fa",
             "fa-check",
@@ -73,7 +72,7 @@ function NoteActions(props) {
           focusable="false"
           data-prefix="fas"
           data-icon="trash-alt"
-          onClick={() => deleteConfirm(id, deleteNote)}
+          onClick={() => actionConfirm(DELETE_CONFIRM, id, deleteNote)}
           className={classnames(
             "svg-inline--fa",
             "fa-trash-alt",
