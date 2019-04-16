@@ -2,6 +2,7 @@ import React from "react";
 import styles from "./index.module.scss";
 
 function Types(props) {
+  const { type } = props;
   return (
     <div className={styles.types}>
       <div className={styles.types__title}>Тип: </div>
@@ -12,7 +13,7 @@ function Types(props) {
           id="text"
           name="type"
           value="text"
-          defaultChecked
+          checked={type === "text" ? true : false}
         />
         <label htmlFor="text">Текст</label>
       </div>
@@ -23,6 +24,7 @@ function Types(props) {
           id="image"
           name="type"
           value="image"
+          checked={type === "image" ? true : false}
         />
         <label htmlFor="image">Изображение</label>
       </div>
@@ -33,6 +35,7 @@ function Types(props) {
           id="list"
           name="type"
           value="list"
+          checked={type === "list" ? true : false}
         />
         <label htmlFor="list">Список</label>
       </div>

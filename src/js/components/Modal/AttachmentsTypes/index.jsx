@@ -2,6 +2,8 @@ import React from "react";
 import styles from "./index.module.scss";
 
 function AttachmentsTypes(props) {
+  const { attachmentType, onChange } = props;
+
   return (
     <div className={styles.types}>
       <div className={styles.types__title}>Приложения:</div>
@@ -11,8 +13,8 @@ function AttachmentsTypes(props) {
           value="link"
           id="att_type_link"
           name="attachmentType"
-          onChange={props.onChange}
-          defaultChecked
+          onChange={onChange}
+          checked={attachmentType === "link"}
         />
         <label htmlFor="att_type_link">Ссылки</label>
       </div>
@@ -23,7 +25,8 @@ function AttachmentsTypes(props) {
           id="att_type_image"
           name="attachmentType"
           className={styles.types__item}
-          onChange={props.onChange}
+          onChange={onChange}
+          checked={attachmentType === "image"}
         />
         <label htmlFor="att_type_image">Изображения</label>
       </div>

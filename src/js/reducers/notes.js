@@ -7,13 +7,18 @@ import {
   FETCH_ON_GET_ARCHIVE_START,
   FETCH_ON_GET_ARCHIVE_SUCCESS,
   ON_CHANGE_FILTERS,
-  FETCH_ON_GET_NOTES_STOP
+  FETCH_ON_GET_NOTES_STOP,
+  SET_EDIT_NOTE_STATE,
+  SET_ADD_NOTE_STATE,
+  ON_HIDE_MODAL,
+  ON_SHOW_MODAL
 } from "../constants/action-types";
 
 const sessionFilters = localStorage.getItem("filters");
 
 const initialState = {
   notes: [],
+  notesHash: {},
   archive: [],
   tags: [],
   colors: [],
@@ -22,7 +27,9 @@ const initialState = {
   filters: sessionFilters ? JSON.parse(sessionFilters) : [],
   isLoadingNotes: false,
   isLoadingMainData: false,
-  isArchive: false
+  isArchive: false,
+  modalVisible: false,
+  editableNoteId: -1
 };
 function rootReducer(state = initialState, action) {
   if (action.type === FETCH_ON_GET_NOTES_START) {
@@ -32,9 +39,16 @@ function rootReducer(state = initialState, action) {
       isArchive: false
     };
   } else if (action.type === FETCH_ON_GET_NOTES_SUCCESS) {
+    const notes = action.payload;
+    let notesHash = {};
+    if (notes) {
+      notes.forEach(note => (notesHash[note.id] = note));
+    }
+
     return {
       ...state,
-      notes: action.payload
+      notes,
+      notesHash
     };
   } else if (action.type === FETCH_ON_GET_NOTES_STOP) {
     return {
@@ -48,9 +62,16 @@ function rootReducer(state = initialState, action) {
       isArchive: true
     };
   } else if (action.type === FETCH_ON_GET_ARCHIVE_SUCCESS) {
+    const notes = action.payload;
+    let notesHash = {};
+    if (notes) {
+      notes.forEach(note => (notesHash[note.id] = note));
+    }
+
     return {
       ...state,
-      notes: action.payload
+      notes,
+      notesHash
     };
   } else if (action.type === FETCH_ON_GET_NOTES_DATA_START) {
     return {
@@ -58,7 +79,7 @@ function rootReducer(state = initialState, action) {
       isLoadingMainData: true
     };
   } else if (action.type === FETCH_ON_GET_NOTES_DATA_SUCCESS) {
-    const { colors, tags } = action.payload;
+    const { colors, tags, notes } = action.payload;
 
     let colorsHash = {};
     if (colors) {
@@ -70,7 +91,12 @@ function rootReducer(state = initialState, action) {
       tags.forEach(tag => (tagsHash[tag.id] = tag));
     }
 
-    const data = { ...action.payload, colorsHash, tagsHash };
+    let notesHash = {};
+    if (notes) {
+      notes.forEach(note => (notesHash[note.id] = note));
+    }
+
+    const data = { ...action.payload, colorsHash, tagsHash, notesHash };
     return {
       ...state,
       ...data
@@ -94,6 +120,28 @@ function rootReducer(state = initialState, action) {
     return {
       ...state,
       filters
+    };
+  } else if (action.type === SET_EDIT_NOTE_STATE) {
+    const { id } = action.payload;
+
+    return {
+      ...state,
+      editableNoteId: id
+    };
+  } else if (action.type === SET_ADD_NOTE_STATE) {
+    return {
+      ...state,
+      editableNoteId: -1
+    };
+  } else if (action.type === ON_SHOW_MODAL) {
+    return {
+      ...state,
+      modalVisible: true
+    };
+  } else if (action.type === ON_HIDE_MODAL) {
+    return {
+      ...state,
+      modalVisible: false
     };
   }
   return state;

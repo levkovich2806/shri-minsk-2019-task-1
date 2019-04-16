@@ -7,10 +7,11 @@ class NoteList extends Component {
     const { items, checkedState = false } = this.props;
     return (
       <div className={checkedState ? styles.listC : styles.listNB}>
-        {items.map(item => {
+        {items.map((item, index) => {
           if (item.checked === checkedState) {
+            const key = `${item.text}${index}`;
             return (
-              <div className={styles.container} key={item.text}>
+              <div className={styles.container} key={key}>
                 <NoteListItem text={item.text} checked={checkedState} />{" "}
               </div>
             );

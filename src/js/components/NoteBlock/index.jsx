@@ -5,6 +5,10 @@ import { changeNoteStatus } from "../../actions";
 import styles from "./index.module.scss";
 import NoteActions from "../NoteActions";
 import { connect } from "react-redux";
+import {
+  SET_EDIT_NOTE_STATE,
+  ON_SHOW_MODAL
+} from "../../constants/action-types";
 import { getReadableDate } from "../../utils/utils";
 
 class NoteBlock extends Component {
@@ -13,8 +17,9 @@ class NoteBlock extends Component {
     onMoveToArchive(id);
   };
 
-  editNote = () => {
-    console.log("editNote");
+  editNote = id => {
+    const { onEditNote } = this.props;
+    onEditNote(id);
   };
 
   getBgStyle = () => {
@@ -90,6 +95,17 @@ export default connect(
           }
         })
       );
+    },
+    onEditNote: id => {
+      dispatch({
+        type: SET_EDIT_NOTE_STATE,
+        payload: {
+          id
+        }
+      });
+      dispatch({
+        type: ON_SHOW_MODAL
+      });
     }
   })
 )(NoteBlock);

@@ -17,23 +17,56 @@ import AttachmentsTypes from "./AttachmentsTypes";
 class Modal extends Component {
   state = {
     type: "text",
-    size: "",
     items: [],
     title: "",
     url: "",
     color: "",
     tags: [],
-    description: "",
+    text: "",
     attachmentType: "link",
     attachments: []
   };
 
-  getTitle = () => {
-    const { action = "add" } = this.props;
-    if (action === "add") {
-      return "Добавить";
+  componentDidMount() {
+    const { editableNoteId } = this.props;
+    if (editableNoteId !== -1) {
+      const { notesHash } = this.props;
+      const noteData = notesHash[editableNoteId];
+      if (noteData) {
+        this.setEditNoteData(noteData);
+      }
     }
-    return "Редактировать";
+  }
+
+  setEditNoteData = data => {
+    console.log(data);
+    const { type, items, title, url, color, tags, text, attachments } = data;
+    const editable = {
+      type,
+      title,
+      url,
+      color,
+      tags,
+      text
+    };
+    let attachmentType;
+    if (attachments && attachments.length > 0) {
+      attachmentType = attachments[0].type;
+      editable.attachmentType = attachmentType;
+      editable.attachments = attachments.map(({ url }) => url);
+    }
+    if (items && items.length > 0) {
+      editable.items = items.map(({ text }) => text);
+    }
+    this.setState({ ...editable });
+  };
+
+  getTitle = () => {
+    const { editableNoteId } = this.props;
+    if (editableNoteId > -1) {
+      return "Редактировать";
+    }
+    return "Добавить";
   };
 
   onTypeChange = e => {
@@ -75,7 +108,7 @@ class Modal extends Component {
 
   onDescriptionChange = e => {
     this.setState({
-      description: e.target.value
+      text: e.target.value
     });
   };
 
@@ -92,9 +125,17 @@ class Modal extends Component {
   };
 
   createItemsList = () => {
-    return this.state.items.map((el, index) => (
-      <div key={index}>
-        <input value={el} onChange={e => this.handleChangeItemList(e, index)} />
+    const { items } = this.state;
+    return items.map((el, index) => (
+      <div
+        key={index}
+        className={classnames(styles.form__attachments_item, styles.attachment)}
+      >
+        <input
+          value={el ? el : ""}
+          onChange={e => this.handleChangeItemList(e, index)}
+          className={styles.attachment__text}
+        />
         <input
           type="button"
           value="X"
@@ -118,10 +159,15 @@ class Modal extends Component {
   };
 
   createAttachmetList = () => {
-    return this.state.attachments.map((el, index) => (
-      <div key={index}>
+    const { attachments } = this.state;
+    return attachments.map((el, index) => (
+      <div
+        key={index}
+        className={classnames(styles.form__attachments_item, styles.attachment)}
+      >
         <input
-          value={el}
+          className={styles.attachment__text}
+          value={el ? el : ""}
           onChange={e => this.handleChangeAttachment(e, index)}
         />
         <input
@@ -160,6 +206,7 @@ class Modal extends Component {
 
   createAttachmentObject = () => {
     const { attachments, attachmentType } = this.state;
+    console.log(attachments, attachmentType);
     return attachments.map(url => {
       return {
         type: attachmentType,
@@ -176,9 +223,10 @@ class Modal extends Component {
         text
       };
     });
-  }
+  };
 
-  addNote = () => {
+  sendNote = () => {
+    const { editableNoteId } = this.props;
     let data = { ...{}, ...this.state };
     if (data.attachments && data.attachments.length > 0) {
       data.attachments = this.createAttachmentObject();
@@ -190,34 +238,57 @@ class Modal extends Component {
     } else {
       delete data.items;
     }
+
+    if (data.type !== "image") {
+      delete data.url;
+    }
+
+    delete data.attachmentType;
+
+    console.log(data);
+
     this.props.hideModal();
-    this.props.addNote(data);
+    if (editableNoteId !== -1) {
+      this.props.onUpdateNote(data);
+    } else {
+      this.props.onAddNote(data);
+    }
   };
 
   updateNote = () => {
     this.props.hideModal();
-    this.props.updateNote(this.state);
+    this.props.onUpdateNote(this.state);
   };
 
   render() {
-    const { hideModal, action = "add", tags, colors } = this.props;
-    const { type } = this.state;
+    console.log(this.props, this.state);
+    const { editableNoteId, hideModal, tags, colors } = this.props;
+    const {
+      type,
+      title,
+      url,
+      color,
+      tags: checkedTags,
+      text,
+      attachmentType
+    } = this.state;
 
-    const title = this.getTitle();
+    const modalTitle = this.getTitle();
 
     return (
       <div className={styles.wrapper}>
         <div className={styles.main}>
           <div className={styles.main__content}>
-            <div className={styles.main__title}>{title} заметку</div>
+            <div className={styles.main__title}>{modalTitle} заметку</div>
             <div className={classnames(styles.main__form, styles.form)}>
-              <Types onChange={this.onTypeChange} />
-              <Title onChange={this.onTitleChange} />
-              {type === "image" && <Image onChange={this.onImageChange} />}
-              {/* <List /> */}
+              <Types onChange={this.onTypeChange} type={type} />
+              <Title onChange={this.onTitleChange} title={title} />
+              {type === "image" && (
+                <Image onChange={this.onImageChange} url={url} />
+              )}
               {type === "list" && (
-                <>
-                  <div className={styles.form__listItemTitle}>
+                <div className={styles.form__attachments}>
+                  <div className={styles.form__attachments_title}>
                     Элементы списка:
                   </div>
                   {this.createItemsList()}
@@ -226,13 +297,27 @@ class Modal extends Component {
                     value="Добавить"
                     onClick={this.addListItem}
                   />
-                </>
+                </div>
               )}
-              <ColorPicker colors={colors} onChange={this.onColorChange} />
-              <TagList tags={tags} onChange={this.onTagsChange} />
-              <Description onChange={this.onDescriptionChange} />
+              <ColorPicker
+                colors={colors}
+                onChange={this.onColorChange}
+                checkedColor={color}
+              />
+              <TagList
+                tags={tags}
+                onChange={this.onTagsChange}
+                checkedTags={checkedTags}
+              />
+              <Description
+                onChange={this.onDescriptionChange}
+                description={text}
+              />
               <div className={styles.form__attachments}>
-                <AttachmentsTypes onChange={this.onAttachmentTypeChange} />
+                <AttachmentsTypes
+                  onChange={this.onAttachmentTypeChange}
+                  attachmentType={attachmentType}
+                />
                 {this.createAttachmetList()}
                 <input
                   type="button"
@@ -243,15 +328,15 @@ class Modal extends Component {
             </div>
           </div>
           <div className={styles.main__actions}>
-            {action === "add" ? (
-              <span onClick={this.addNote} className={styles.btn}>
-                Добавить
+            {editableNoteId !== -1 ? (
+              <span onClick={this.sendNote} className={styles.btn}>
+                Сохранить
               </span>
             ) : (
-                <span onClick={this.updateNote} className={styles.btn}>
-                  Сохранить
+              <span onClick={this.sendNote} className={styles.btn}>
+                Добавить
               </span>
-              )}
+            )}
             <span
               onClick={hideModal}
               className={classnames(styles.btn, styles.btn__close)}
@@ -268,10 +353,12 @@ class Modal extends Component {
 export default connect(
   state => ({
     tags: state.notes.tags,
-    colors: state.notes.colors
+    colors: state.notes.colors,
+    notesHash: state.notes.notesHash,
+    editableNoteId: state.notes.editableNoteId
   }),
   dispatch => ({
-    addNote: note => {
+    onAddNote: note => {
       dispatch(
         addNote({
           payload: {
@@ -280,7 +367,7 @@ export default connect(
         })
       );
     },
-    updateNote: note => {
+    onUpdateNote: note => {
       dispatch(
         updateNote({
           payload: {

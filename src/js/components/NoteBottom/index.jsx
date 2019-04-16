@@ -6,6 +6,7 @@ import NoteBottomImage from "../NoteBottomImage";
 class NoteBottom extends Component {
   getBottomLinks = () => {
     const { attachments } = this.props;
+
     return attachments.map((item, index) => {
       let last = false;
       if (index + 1 === attachments.length) {
@@ -17,8 +18,9 @@ class NoteBottom extends Component {
 
   getBottomImages = () => {
     const { attachments } = this.props;
-    return attachments.map(item => {
-      return <NoteBottomImage key={item.url} url={item.url} />;
+    return attachments.map((item, index) => {
+      const key = `${item.url}${index}`;
+      return <NoteBottomImage key={key} url={item.url} />;
     });
   };
 

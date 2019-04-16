@@ -2,7 +2,7 @@ import React from "react";
 import styles from "./index.module.scss";
 
 function ColorPicker(props) {
-  const { colors } = props;
+  const { colors, checkedColor } = props;
 
   return (
     <div className={styles.colorlist}>
@@ -11,12 +11,18 @@ function ColorPicker(props) {
         size="3"
         className={styles.colorlist__list}
         onChange={props.onChange}
+        value={checkedColor}
       >
         <option value="" style={{ backgroundColor: "#FFFFFF" }}>
           #FFFFFF
         </option>
         {colors.map(({ id, color }) => (
-          <option key={color} value={id} style={{ backgroundColor: color }}>
+          <option
+            key={color}
+            value={id}
+            style={{ backgroundColor: color }}
+            checked={checkedColor === id}
+          >
             {color}
           </option>
         ))}

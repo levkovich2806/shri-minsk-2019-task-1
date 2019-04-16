@@ -1,4 +1,5 @@
 import sendRequest from "../utils/request";
+import { SET_EDIT_NOTE_STATE } from "../constants/action-types";
 
 const API = "http://localhost:8000";
 const NOTE_STATUS = {
@@ -99,14 +100,29 @@ export const deleteNote = ({ payload: { id = 0 } }) => async dispatch => {
 /**
  * Обновляем заметку
  */
-export const updateNote = ({ payload: { note = {}, id = 0 } }) => async dispatch => {
+export const updateNote = ({ payload: { note = {} } }) => async (
+  dispatch,
+  getState
+) => {
+  const { editableNoteId } = getState().notes;
+
+  if (editableNoteId === -1) {
+    return false;
+  }
+
   await sendRequest({
-    url: `${API}/api/cards/${id}`,
+    url: `${API}/api/cards/${editableNoteId}`,
     params: {
       method: "PATCH",
       body: {
         card: note
       }
+    }
+  });
+  dispatch({
+    type: SET_EDIT_NOTE_STATE,
+    payload: {
+      id: -1
     }
   });
   dispatch(getNotes());

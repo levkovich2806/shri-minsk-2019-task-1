@@ -38,6 +38,7 @@ router.get("/", (req, res) => {
  */
 router.post("/", (req, res) => {
   const { card } = req.body;
+  console.log(card);
   const result = cards.addCard(card);
   if (result) {
     return res.status(200).send("Заметка добавлена");
@@ -67,7 +68,7 @@ router.delete("/:id", (req, res) => {
 router.patch("/:id", (req, res) => {
   const { id } = req.params;
   const { card } = req.body;
-
+  console.log(card);
   cards
     .updateCard(Number(id), card)
     .then(({ data, status }) => {

@@ -7,6 +7,7 @@ import NoteList from "../NoteList";
 class NoteContent extends Component {
   render() {
     const {
+      id,
       title,
       color,
       text,
@@ -46,7 +47,7 @@ class NoteContent extends Component {
               content={<NoteList items={items} />}
             />
             <NoteBlock
-              {...{ text, tags, reminder, created, items }}
+              {...{ id, text, tags, reminder, created, items }}
               content={<NoteList items={items} checkedState={true} />}
               modificator={["withTopBlock", "listContainer"]}
             />

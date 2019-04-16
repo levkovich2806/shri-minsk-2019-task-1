@@ -43,12 +43,24 @@
     justify-content: space-between;
   }
 
-  &__listItemTitle {
-    font-weight: bold;
-  }
-
   &__attachments {
-    margin-bottom: 20px;
+    margin-bottom: 10px;
+
+    &_title {
+      font-weight: bold;
+    }
+
+    &_item {
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+    }
+  }
+}
+
+.attachment {
+  &__text {
+    width: 100%;
   }
 }
 
