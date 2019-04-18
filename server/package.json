@@ -11,16 +11,8 @@
   "scripts": {
     "start": "node index.js"
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/levkovich2806/shri-minsk-2019-task-1.git"
-  },
   "author": "Sergey Levkovich",
   "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/levkovich2806/shri-minsk-2019-task-1/issues"
-  },
-  "homepage": "https://github.com/levkovich2806/shri-minsk-2019-task-1#readme",
   "browserslist": [
     ">0.2%",
     "not dead",
