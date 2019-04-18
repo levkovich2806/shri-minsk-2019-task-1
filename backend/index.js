@@ -16,9 +16,9 @@ app.use("/api/cards", cards);
 
 // Все маршруты, кроме тех, что описаны выше (в нашем случае только /api/cards/*)  обрабатываем ниже
 
-app.use(express.static(path.resolve("../front/build")));
+app.use(express.static(path.resolve("../frontend/build")));
 app.get("/", (req, res) =>
-  res.sendFile(path.resolve("../front/build/index.html"))
+  res.sendFile(path.resolve("../frontend/build/index.html"))
 );
 
 app.use("*", (req, res) => {
