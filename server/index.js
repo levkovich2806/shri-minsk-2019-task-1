@@ -1,10 +1,11 @@
 const express = require("express");
+const path = require("path");
 const utils = require("./utils/utils");
 const cors = require("cors");
 
 const app = express();
 app.use(cors());
-app.use(express.static("static"));
+
 app.use(express.json());
 
 utils.getCardsData();
@@ -17,6 +18,9 @@ app.use("/api/cards", cards);
 app.use("*", (req, res) => {
   return res.status(404).send("<h1>Page not found</h1>");
 });
+
+app.use(express.static("build"));
+app.get("*", (req, res) => res.sendFile(path.resolve("build", "index.html")));
 
 app.listen(8000);
 
