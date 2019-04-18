@@ -25,6 +25,6 @@ app.use("*", (req, res) => {
   return res.status(404).send("<h1>Page not found</h1>");
 });
 
-app.listen(8000);
+app.listen(process.env.PORT || 8000)
 
 module.exports = app;
