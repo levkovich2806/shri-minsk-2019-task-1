@@ -1,7 +1,7 @@
 import sendRequest from "../utils/request";
 import { SET_EDIT_NOTE_STATE } from "../constants/action-types";
 
-const API = "http://localhost:8000";
+const API = "";
 const NOTE_STATUS = {
   archive: 0,
   inUse: 1
