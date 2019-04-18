@@ -1,0 +1,32 @@
+.fa-pen,
+.fa-check,
+.fa-trash {
+  color: rgba(0, 0, 0, 0.2);
+  cursor: pointer;
+  margin-right: 17px;
+}
+
+.fa-pen:hover,
+.fa-check:hover,
+.fa-trash:hover {
+  opacity: 1;
+  color: rgba(0, 0, 0, 1);
+}
+
+.fa-pen:active,
+.fa-check:active,
+.fa-trash:active {
+  color: rgba(0, 0, 0, 0.5);
+}
+
+.actions {
+  opacity: 0.5;
+  transition: opacity 1s;
+}
+
+@media (max-width: 1024px) {
+  .actions {
+    opacity: 1;
+    transition: opacity 1s;
+  }
+}

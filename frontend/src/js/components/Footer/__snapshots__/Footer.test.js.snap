@@ -1,0 +1,37 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Footer Footer rendering 1`] = `
+<div
+  className="footer"
+>
+  <div
+    className="footer__author"
+  >
+    Сергей Левкович
+  </div>
+  <div
+    className="footer__copyright"
+  >
+    © 
+    Яндекс ШРИ
+  </div>
+</div>
+`;
+
+exports[`Footer rendering 1`] = `
+<div
+  className="footer"
+>
+  <div
+    className="footer__author"
+  >
+    Сергей Левкович
+  </div>
+  <div
+    className="footer__copyright"
+  >
+    © 
+    Яндекс ШРИ
+  </div>
+</div>
+`;

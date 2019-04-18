@@ -1,0 +1,29 @@
+.container {
+  position: relative;
+  margin-right: 12px;
+  margin-bottom: 12px;
+  cursor: pointer;
+  line-height: 22px;
+  font-size: 18px;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+.listNB {
+  display: flex;
+  flex-direction: column;
+}
+
+.list {
+  display: flex;
+  flex-direction: column;
+}
+
+.listC {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  padding-top: 10px;
+}
