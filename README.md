@@ -1,5 +1,7 @@
 # shri-minsk-2019-task-1
 
+https://shri2019.herokuapp.com/
+
 <h1 align="center">Домашняя работа - Адаптивная верстка</h1>
 <h2 align="center">Выполнил - Левкович Сергей</h2>
 
