@@ -1,0 +1,86 @@
+.container {
+  position: relative;
+  height: 32px;
+  width: 32px;
+  margin-left: 16px;
+  cursor: pointer;
+  line-height: 22px;
+  font-size: 18px;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+.container input {
+  position: absolute;
+  opacity: 0;
+  cursor: pointer;
+  height: 0;
+  width: 0;
+}
+
+.checkmark {
+  opacity: 0.4;
+  position: absolute;
+  height: 32px;
+  width: 32px;
+  background-color: #d9d9d9;
+  border-radius: 8px;
+  transition: opacity 0.5s;
+}
+
+.container:hover input ~ .checkmark {
+  opacity: 1;
+}
+
+.container:active input ~ .checkmark {
+  opacity: 0.8;
+}
+
+.checkmark::after {
+  content: "";
+  position: absolute;
+  display: none;
+}
+
+.container .checkmark::after {
+  left: 10px;
+  top: 3px;
+  width: 8px;
+  height: 18px;
+  border: solid black;
+  border-width: 0 3px 3px 0;
+  -webkit-transform: rotate(45deg);
+  -ms-transform: rotate(45deg);
+  transform: rotate(45deg);
+}
+
+.container input:checked ~ .checkmark::after {
+  display: block;
+}
+
+.container input:checked ~ span {
+  opacity: 1;
+}
+
+@media (max-width: 500px) {
+  .container {
+    width: 48px;
+    height: 48px;
+    flex: 0 0 auto;
+    margin-right: 3px;
+  }
+
+  .checkmark {
+    width: 48px;
+    height: 48px;
+  }
+
+  .container .checkmark::after {
+    left: 16px;
+    top: 3px;
+    width: 14px;
+    height: 28px;
+  }
+}
