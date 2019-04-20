@@ -85,7 +85,7 @@ describe("Server Utils", function () {
 
   test("createQueryFilter", () => {
     const color = "2,3,6";
-    console.log(utils.createQueryFilter(color));
+
     expect(utils.createQueryFilter(color)).toEqual({
       colors: [
         "2",
