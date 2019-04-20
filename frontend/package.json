@@ -21,7 +21,6 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "jest -u",
-    "jest": "react-scripts test --ci --coverage",
     "eject": "react-scripts eject",
     "clear": "del-cli dist",
     "eslint": "eslint src/js/*.js",

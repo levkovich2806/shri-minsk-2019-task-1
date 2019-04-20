@@ -1,0 +1,791 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`ColorPicker ColorPicker rendering 1`] = `
+ShallowWrapper {
+  Symbol(enzyme.__root__): [Circular],
+  Symbol(enzyme.__unrendered__): <ColorPicker
+    checkedColor={2}
+    colors={
+      Array [
+        Object {
+          "color": "#E84747",
+          "id": 0,
+        },
+        Object {
+          "color": "#F2994A",
+          "id": 1,
+        },
+        Object {
+          "color": "#F2C94C",
+          "id": 2,
+        },
+        Object {
+          "color": "#219653",
+          "id": 3,
+        },
+        Object {
+          "color": "#56CCF2",
+          "id": 4,
+        },
+        Object {
+          "color": "#2F80ED",
+          "id": 5,
+        },
+        Object {
+          "color": "#9B51E0",
+          "id": 6,
+        },
+      ]
+    }
+  />,
+  Symbol(enzyme.__renderer__): Object {
+    "batchedUpdates": [Function],
+    "checkPropTypes": [Function],
+    "getNode": [Function],
+    "render": [Function],
+    "simulateError": [Function],
+    "simulateEvent": [Function],
+    "unmount": [Function],
+  },
+  Symbol(enzyme.__node__): Object {
+    "instance": null,
+    "key": undefined,
+    "nodeType": "host",
+    "props": Object {
+      "children": Array [
+        <span
+          className="colorlist__title"
+        >
+          Цвет заметки: 
+        </span>,
+        <select
+          className="colorlist__list"
+          size="3"
+          value={2}
+        >
+          <option
+            style={
+              Object {
+                "backgroundColor": "#FFFFFF",
+              }
+            }
+            value=""
+          >
+            #FFFFFF
+          </option>
+          <option
+            checked={false}
+            style={
+              Object {
+                "backgroundColor": "#E84747",
+              }
+            }
+            value={0}
+          >
+            #E84747
+          </option>
+          <option
+            checked={false}
+            style={
+              Object {
+                "backgroundColor": "#F2994A",
+              }
+            }
+            value={1}
+          >
+            #F2994A
+          </option>
+          <option
+            checked={true}
+            style={
+              Object {
+                "backgroundColor": "#F2C94C",
+              }
+            }
+            value={2}
+          >
+            #F2C94C
+          </option>
+          <option
+            checked={false}
+            style={
+              Object {
+                "backgroundColor": "#219653",
+              }
+            }
+            value={3}
+          >
+            #219653
+          </option>
+          <option
+            checked={false}
+            style={
+              Object {
+                "backgroundColor": "#56CCF2",
+              }
+            }
+            value={4}
+          >
+            #56CCF2
+          </option>
+          <option
+            checked={false}
+            style={
+              Object {
+                "backgroundColor": "#2F80ED",
+              }
+            }
+            value={5}
+          >
+            #2F80ED
+          </option>
+          <option
+            checked={false}
+            style={
+              Object {
+                "backgroundColor": "#9B51E0",
+              }
+            }
+            value={6}
+          >
+            #9B51E0
+          </option>
+        </select>,
+      ],
+      "className": "colorlist",
+    },
+    "ref": null,
+    "rendered": Array [
+      Object {
+        "instance": null,
+        "key": undefined,
+        "nodeType": "host",
+        "props": Object {
+          "children": "Цвет заметки: ",
+          "className": "colorlist__title",
+        },
+        "ref": null,
+        "rendered": "Цвет заметки: ",
+        "type": "span",
+      },
+      Object {
+        "instance": null,
+        "key": undefined,
+        "nodeType": "host",
+        "props": Object {
+          "children": Array [
+            <option
+              style={
+                Object {
+                  "backgroundColor": "#FFFFFF",
+                }
+              }
+              value=""
+            >
+              #FFFFFF
+            </option>,
+            Array [
+              <option
+                checked={false}
+                style={
+                  Object {
+                    "backgroundColor": "#E84747",
+                  }
+                }
+                value={0}
+              >
+                #E84747
+              </option>,
+              <option
+                checked={false}
+                style={
+                  Object {
+                    "backgroundColor": "#F2994A",
+                  }
+                }
+                value={1}
+              >
+                #F2994A
+              </option>,
+              <option
+                checked={true}
+                style={
+                  Object {
+                    "backgroundColor": "#F2C94C",
+                  }
+                }
+                value={2}
+              >
+                #F2C94C
+              </option>,
+              <option
+                checked={false}
+                style={
+                  Object {
+                    "backgroundColor": "#219653",
+                  }
+                }
+                value={3}
+              >
+                #219653
+              </option>,
+              <option
+                checked={false}
+                style={
+                  Object {
+                    "backgroundColor": "#56CCF2",
+                  }
+                }
+                value={4}
+              >
+                #56CCF2
+              </option>,
+              <option
+                checked={false}
+                style={
+                  Object {
+                    "backgroundColor": "#2F80ED",
+                  }
+                }
+                value={5}
+              >
+                #2F80ED
+              </option>,
+              <option
+                checked={false}
+                style={
+                  Object {
+                    "backgroundColor": "#9B51E0",
+                  }
+                }
+                value={6}
+              >
+                #9B51E0
+              </option>,
+            ],
+          ],
+          "className": "colorlist__list",
+          "onChange": undefined,
+          "size": "3",
+          "value": 2,
+        },
+        "ref": null,
+        "rendered": Array [
+          Object {
+            "instance": null,
+            "key": undefined,
+            "nodeType": "host",
+            "props": Object {
+              "children": "#FFFFFF",
+              "style": Object {
+                "backgroundColor": "#FFFFFF",
+              },
+              "value": "",
+            },
+            "ref": null,
+            "rendered": "#FFFFFF",
+            "type": "option",
+          },
+          Object {
+            "instance": null,
+            "key": "#E84747",
+            "nodeType": "host",
+            "props": Object {
+              "checked": false,
+              "children": "#E84747",
+              "style": Object {
+                "backgroundColor": "#E84747",
+              },
+              "value": 0,
+            },
+            "ref": null,
+            "rendered": "#E84747",
+            "type": "option",
+          },
+          Object {
+            "instance": null,
+            "key": "#F2994A",
+            "nodeType": "host",
+            "props": Object {
+              "checked": false,
+              "children": "#F2994A",
+              "style": Object {
+                "backgroundColor": "#F2994A",
+              },
+              "value": 1,
+            },
+            "ref": null,
+            "rendered": "#F2994A",
+            "type": "option",
+          },
+          Object {
+            "instance": null,
+            "key": "#F2C94C",
+            "nodeType": "host",
+            "props": Object {
+              "checked": true,
+              "children": "#F2C94C",
+              "style": Object {
+                "backgroundColor": "#F2C94C",
+              },
+              "value": 2,
+            },
+            "ref": null,
+            "rendered": "#F2C94C",
+            "type": "option",
+          },
+          Object {
+            "instance": null,
+            "key": "#219653",
+            "nodeType": "host",
+            "props": Object {
+              "checked": false,
+              "children": "#219653",
+              "style": Object {
+                "backgroundColor": "#219653",
+              },
+              "value": 3,
+            },
+            "ref": null,
+            "rendered": "#219653",
+            "type": "option",
+          },
+          Object {
+            "instance": null,
+            "key": "#56CCF2",
+            "nodeType": "host",
+            "props": Object {
+              "checked": false,
+              "children": "#56CCF2",
+              "style": Object {
+                "backgroundColor": "#56CCF2",
+              },
+              "value": 4,
+            },
+            "ref": null,
+            "rendered": "#56CCF2",
+            "type": "option",
+          },
+          Object {
+            "instance": null,
+            "key": "#2F80ED",
+            "nodeType": "host",
+            "props": Object {
+              "checked": false,
+              "children": "#2F80ED",
+              "style": Object {
+                "backgroundColor": "#2F80ED",
+              },
+              "value": 5,
+            },
+            "ref": null,
+            "rendered": "#2F80ED",
+            "type": "option",
+          },
+          Object {
+            "instance": null,
+            "key": "#9B51E0",
+            "nodeType": "host",
+            "props": Object {
+              "checked": false,
+              "children": "#9B51E0",
+              "style": Object {
+                "backgroundColor": "#9B51E0",
+              },
+              "value": 6,
+            },
+            "ref": null,
+            "rendered": "#9B51E0",
+            "type": "option",
+          },
+        ],
+        "type": "select",
+      },
+    ],
+    "type": "div",
+  },
+  Symbol(enzyme.__nodes__): Array [
+    Object {
+      "instance": null,
+      "key": undefined,
+      "nodeType": "host",
+      "props": Object {
+        "children": Array [
+          <span
+            className="colorlist__title"
+          >
+            Цвет заметки: 
+          </span>,
+          <select
+            className="colorlist__list"
+            size="3"
+            value={2}
+          >
+            <option
+              style={
+                Object {
+                  "backgroundColor": "#FFFFFF",
+                }
+              }
+              value=""
+            >
+              #FFFFFF
+            </option>
+            <option
+              checked={false}
+              style={
+                Object {
+                  "backgroundColor": "#E84747",
+                }
+              }
+              value={0}
+            >
+              #E84747
+            </option>
+            <option
+              checked={false}
+              style={
+                Object {
+                  "backgroundColor": "#F2994A",
+                }
+              }
+              value={1}
+            >
+              #F2994A
+            </option>
+            <option
+              checked={true}
+              style={
+                Object {
+                  "backgroundColor": "#F2C94C",
+                }
+              }
+              value={2}
+            >
+              #F2C94C
+            </option>
+            <option
+              checked={false}
+              style={
+                Object {
+                  "backgroundColor": "#219653",
+                }
+              }
+              value={3}
+            >
+              #219653
+            </option>
+            <option
+              checked={false}
+              style={
+                Object {
+                  "backgroundColor": "#56CCF2",
+                }
+              }
+              value={4}
+            >
+              #56CCF2
+            </option>
+            <option
+              checked={false}
+              style={
+                Object {
+                  "backgroundColor": "#2F80ED",
+                }
+              }
+              value={5}
+            >
+              #2F80ED
+            </option>
+            <option
+              checked={false}
+              style={
+                Object {
+                  "backgroundColor": "#9B51E0",
+                }
+              }
+              value={6}
+            >
+              #9B51E0
+            </option>
+          </select>,
+        ],
+        "className": "colorlist",
+      },
+      "ref": null,
+      "rendered": Array [
+        Object {
+          "instance": null,
+          "key": undefined,
+          "nodeType": "host",
+          "props": Object {
+            "children": "Цвет заметки: ",
+            "className": "colorlist__title",
+          },
+          "ref": null,
+          "rendered": "Цвет заметки: ",
+          "type": "span",
+        },
+        Object {
+          "instance": null,
+          "key": undefined,
+          "nodeType": "host",
+          "props": Object {
+            "children": Array [
+              <option
+                style={
+                  Object {
+                    "backgroundColor": "#FFFFFF",
+                  }
+                }
+                value=""
+              >
+                #FFFFFF
+              </option>,
+              Array [
+                <option
+                  checked={false}
+                  style={
+                    Object {
+                      "backgroundColor": "#E84747",
+                    }
+                  }
+                  value={0}
+                >
+                  #E84747
+                </option>,
+                <option
+                  checked={false}
+                  style={
+                    Object {
+                      "backgroundColor": "#F2994A",
+                    }
+                  }
+                  value={1}
+                >
+                  #F2994A
+                </option>,
+                <option
+                  checked={true}
+                  style={
+                    Object {
+                      "backgroundColor": "#F2C94C",
+                    }
+                  }
+                  value={2}
+                >
+                  #F2C94C
+                </option>,
+                <option
+                  checked={false}
+                  style={
+                    Object {
+                      "backgroundColor": "#219653",
+                    }
+                  }
+                  value={3}
+                >
+                  #219653
+                </option>,
+                <option
+                  checked={false}
+                  style={
+                    Object {
+                      "backgroundColor": "#56CCF2",
+                    }
+                  }
+                  value={4}
+                >
+                  #56CCF2
+                </option>,
+                <option
+                  checked={false}
+                  style={
+                    Object {
+                      "backgroundColor": "#2F80ED",
+                    }
+                  }
+                  value={5}
+                >
+                  #2F80ED
+                </option>,
+                <option
+                  checked={false}
+                  style={
+                    Object {
+                      "backgroundColor": "#9B51E0",
+                    }
+                  }
+                  value={6}
+                >
+                  #9B51E0
+                </option>,
+              ],
+            ],
+            "className": "colorlist__list",
+            "onChange": undefined,
+            "size": "3",
+            "value": 2,
+          },
+          "ref": null,
+          "rendered": Array [
+            Object {
+              "instance": null,
+              "key": undefined,
+              "nodeType": "host",
+              "props": Object {
+                "children": "#FFFFFF",
+                "style": Object {
+                  "backgroundColor": "#FFFFFF",
+                },
+                "value": "",
+              },
+              "ref": null,
+              "rendered": "#FFFFFF",
+              "type": "option",
+            },
+            Object {
+              "instance": null,
+              "key": "#E84747",
+              "nodeType": "host",
+              "props": Object {
+                "checked": false,
+                "children": "#E84747",
+                "style": Object {
+                  "backgroundColor": "#E84747",
+                },
+                "value": 0,
+              },
+              "ref": null,
+              "rendered": "#E84747",
+              "type": "option",
+            },
+            Object {
+              "instance": null,
+              "key": "#F2994A",
+              "nodeType": "host",
+              "props": Object {
+                "checked": false,
+                "children": "#F2994A",
+                "style": Object {
+                  "backgroundColor": "#F2994A",
+                },
+                "value": 1,
+              },
+              "ref": null,
+              "rendered": "#F2994A",
+              "type": "option",
+            },
+            Object {
+              "instance": null,
+              "key": "#F2C94C",
+              "nodeType": "host",
+              "props": Object {
+                "checked": true,
+                "children": "#F2C94C",
+                "style": Object {
+                  "backgroundColor": "#F2C94C",
+                },
+                "value": 2,
+              },
+              "ref": null,
+              "rendered": "#F2C94C",
+              "type": "option",
+            },
+            Object {
+              "instance": null,
+              "key": "#219653",
+              "nodeType": "host",
+              "props": Object {
+                "checked": false,
+                "children": "#219653",
+                "style": Object {
+                  "backgroundColor": "#219653",
+                },
+                "value": 3,
+              },
+              "ref": null,
+              "rendered": "#219653",
+              "type": "option",
+            },
+            Object {
+              "instance": null,
+              "key": "#56CCF2",
+              "nodeType": "host",
+              "props": Object {
+                "checked": false,
+                "children": "#56CCF2",
+                "style": Object {
+                  "backgroundColor": "#56CCF2",
+                },
+                "value": 4,
+              },
+              "ref": null,
+              "rendered": "#56CCF2",
+              "type": "option",
+            },
+            Object {
+              "instance": null,
+              "key": "#2F80ED",
+              "nodeType": "host",
+              "props": Object {
+                "checked": false,
+                "children": "#2F80ED",
+                "style": Object {
+                  "backgroundColor": "#2F80ED",
+                },
+                "value": 5,
+              },
+              "ref": null,
+              "rendered": "#2F80ED",
+              "type": "option",
+            },
+            Object {
+              "instance": null,
+              "key": "#9B51E0",
+              "nodeType": "host",
+              "props": Object {
+                "checked": false,
+                "children": "#9B51E0",
+                "style": Object {
+                  "backgroundColor": "#9B51E0",
+                },
+                "value": 6,
+              },
+              "ref": null,
+              "rendered": "#9B51E0",
+              "type": "option",
+            },
+          ],
+          "type": "select",
+        },
+      ],
+      "type": "div",
+    },
+  ],
+  Symbol(enzyme.__options__): Object {
+    "adapter": ReactSixteenAdapter {
+      "options": Object {
+        "enableComponentDidUpdateOnSetState": true,
+        "legacyContextMode": "parent",
+        "lifecycles": Object {
+          "componentDidUpdate": Object {
+            "onSetState": true,
+          },
+          "getChildContext": Object {
+            "calledByRenderer": false,
+          },
+          "getDerivedStateFromError": true,
+          "getDerivedStateFromProps": Object {
+            "hasShouldComponentUpdateBug": false,
+          },
+          "getSnapshotBeforeUpdate": true,
+          "setState": Object {
+            "skipsComponentDidUpdateOnNullish": true,
+          },
+        },
+      },
+    },
+  },
+}
+`;

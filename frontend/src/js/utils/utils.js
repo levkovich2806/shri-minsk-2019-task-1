@@ -1,5 +1,22 @@
 import moment from "moment";
 
+export const getReadableReminder = (date) => {
+  const normalDate = moment.unix(date / 1000);
+  const time = moment.unix(date).format("HH:mm");
+  const days = moment().diff(normalDate, "days");
+
+  if (days < 0) {
+    if (days === 1) {
+      return `Завтра в ${time}`;
+    }
+    return `Осталось ${Math.abs(days)} дня(дней)`;
+  } else if (days > 0) {
+    return `Прошло ${Math.abs(days)} дня(дней)`;
+  } else {
+    return `Сегодня в ${time}`;
+  }
+}
+
 export const getReadableDate = date => {
   date /= 1000;
   const now = moment().unix();

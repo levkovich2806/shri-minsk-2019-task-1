@@ -17,21 +17,3 @@ exports[`Footer Footer rendering 1`] = `
   </div>
 </div>
 `;
-
-exports[`Footer rendering 1`] = `
-<div
-  className="footer"
->
-  <div
-    className="footer__author"
-  >
-    Сергей Левкович
-  </div>
-  <div
-    className="footer__copyright"
-  >
-    © 
-    Яндекс ШРИ
-  </div>
-</div>
-`;

@@ -3,7 +3,7 @@ import { mount } from "enzyme";
 import ColorBlock from "./index.jsx";
 import renderer from "react-test-renderer";
 
-describe("ColorBlock", function() {
+describe("ColorBlock", function () {
   test("ColorBlock rendering", () => {
     const params = {
       color: {
@@ -41,5 +41,13 @@ describe("ColorBlock", function() {
     const span = wrapper.find("span.checkmark");
     let containerStyle = span.get(0).props.style["backgroundColor"];
     expect(containerStyle).toBe("orange");
+  });
+
+  it('ColorBlock handle click', () => {
+    const handleClick = jest.fn();
+    const wrapper = mount(<ColorBlock changeStatus={handleClick} color={{ id: 0 }} />);
+    const checkbox = wrapper.find('input[type="checkbox"]');
+    checkbox.simulate('click');
+    expect(handleClick).toHaveBeenCalled();
   });
 });
