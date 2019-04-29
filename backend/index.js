@@ -16,16 +16,14 @@ app.use("/api/cards", cards);
 
 // Все маршруты, кроме тех, что описаны выше (в нашем случае только /api/cards/*)  обрабатываем ниже
 
-app.use("*", (req, res) => {
-  return res.status(404).send("<h1>Page not found</h1>");
-});
-
-
-
 app.use(express.static(path.resolve("../frontend/build")));
 app.get("/", (req, res) =>
   res.sendFile(path.resolve("../frontend/build/index.html"))
 );
+
+app.use("*", (req, res) => {
+  return res.status(404).send("<h1>Page not found</h1>");
+});
 
 app.listen(process.env.PORT || 8000)
 
