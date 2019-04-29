@@ -114,5 +114,7 @@ module.exports = {
   checkColorCorrect,
   getCardSequence,
   getCardSize,
-  createQueryFilter
+  createQueryFilter,
+  getColorsHash,
+  setCardSequence
 };

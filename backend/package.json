@@ -6,10 +6,17 @@
   "main": "index.js",
   "dependencies": {
     "cors": "^2.8.5",
-    "express": "^4.16.4"
+    "express": "^4.16.4",
+    "supertest": "^4.0.2"
+  },
+  "devDependencies": {
+    "jest": "^24.5.0",
+    "nodemon": "^1.18.11"
   },
   "scripts": {
-    "start": "node index.js"
+    "start": "node index.js",
+    "startDev": "nodemon index.js",
+    "test": "jest --colors"
   },
   "author": "Sergey Levkovich",
   "license": "ISC",

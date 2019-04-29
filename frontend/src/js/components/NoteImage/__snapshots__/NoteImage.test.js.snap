@@ -1,0 +1,12 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`NoteImage NoteImage rendering 1`] = `
+<div
+  className="image"
+>
+  <img
+    alt="http://test.ru/logo.png"
+    src="http://test.ru/logo.png"
+  />
+</div>
+`;

@@ -1,0 +1,95 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`AttachmentsTypes AttachmentsTypes rendering with type Image 1`] = `
+<div
+  className="types"
+>
+  <div
+    className="types__title"
+  >
+    Приложения:
+  </div>
+  <div
+    className="types__item"
+  >
+    <input
+      checked={false}
+      id="att_type_link"
+      name="attachmentType"
+      onChange={[Function]}
+      type="radio"
+      value="link"
+    />
+    <label
+      htmlFor="att_type_link"
+    >
+      Ссылки
+    </label>
+  </div>
+  <div
+    className="types__item"
+  >
+    <input
+      checked={true}
+      className="types__item"
+      id="att_type_image"
+      name="attachmentType"
+      onChange={[Function]}
+      type="radio"
+      value="image"
+    />
+    <label
+      htmlFor="att_type_image"
+    >
+      Изображения
+    </label>
+  </div>
+</div>
+`;
+
+exports[`AttachmentsTypes AttachmentsTypes rendering with type Link 1`] = `
+<div
+  className="types"
+>
+  <div
+    className="types__title"
+  >
+    Приложения:
+  </div>
+  <div
+    className="types__item"
+  >
+    <input
+      checked={true}
+      id="att_type_link"
+      name="attachmentType"
+      onChange={[Function]}
+      type="radio"
+      value="link"
+    />
+    <label
+      htmlFor="att_type_link"
+    >
+      Ссылки
+    </label>
+  </div>
+  <div
+    className="types__item"
+  >
+    <input
+      checked={false}
+      className="types__item"
+      id="att_type_image"
+      name="attachmentType"
+      onChange={[Function]}
+      type="radio"
+      value="image"
+    />
+    <label
+      htmlFor="att_type_image"
+    >
+      Изображения
+    </label>
+  </div>
+</div>
+`;
