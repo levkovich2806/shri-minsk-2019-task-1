@@ -1,0 +1,18 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`NoteBottomImage NoteBottomImage rendering 1`] = `
+<div
+  className="content"
+>
+  <a
+    href="http://test.ru/logo.png"
+    rel="noopener noreferrer"
+    target="_blank"
+  >
+    <img
+      alt="http://test.ru/logo.png"
+      src="http://test.ru/logo.png"
+    />
+  </a>
+</div>
+`;

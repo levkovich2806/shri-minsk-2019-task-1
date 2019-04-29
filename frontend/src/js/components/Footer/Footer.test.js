@@ -3,7 +3,7 @@ import { mount } from "enzyme";
 import Footer from "./index.jsx";
 import renderer from "react-test-renderer";
 
-describe("Footer", function() {
+describe("Footer", function () {
   test("Footer rendering", () => {
     const params = {
       author: "Сергей Левкович",

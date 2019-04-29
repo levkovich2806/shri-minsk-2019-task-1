@@ -1,0 +1,13 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Logo Logo rendering 1`] = `
+<a
+  className="logo"
+  href="ya.ru"
+>
+  <img
+    alt="Логотоп"
+    src="images/logo.svg"
+  />
+</a>
+`;

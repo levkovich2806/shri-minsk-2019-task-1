@@ -1,0 +1,21 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`NoteReminder NoteReminder rendering 1`] = `
+<div
+  className="reminder"
+>
+  <div
+    className="reminder__image"
+  >
+    <img
+      alt="Напоминание"
+      src="./images/reminder20.png"
+    />
+  </div>
+  <div
+    className="reminder__text"
+  >
+    Прошло 2 дня(дней)
+  </div>
+</div>
+`;

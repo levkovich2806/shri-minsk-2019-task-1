@@ -1,0 +1,9 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Tag Tag rendering 1`] = `
+<div
+  className="tag"
+>
+  Покупки
+</div>
+`;
